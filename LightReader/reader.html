@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/swiper.css">
+
+    <!-- LightReader references -->
+    <link href="css/reader.css" rel="stylesheet" />
+
+  
+
+</head>
+<body>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+
+                <h2>My first Chapter</h2>
+                <h3>Part 1</h3>
+
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <div id="footer"> 1 </div>
+            </div>
+
+            <div class="swiper-slide">
+                <img src='http://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg' style="width:100%" />
+            </div>
+
+            <div class="swiper-slide">
+
+                <h2>My second Chapter</h2>
+                <h3>Part 1</h3>
+
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <p>pppppp</p>
+                <div id="footer"> 2 </div>
+            </div>
+            <div class="swiper-slide">
+                <img src='http://www.startyourdev.com/images/exemple-css-background.png' style="width:100%" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src='http://www.baka-tsuki.org/project/images/7/7f/Absolute_Duo_Volume_1_Colour_2.jpg' style="width:100%" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+        <!-- Cordova reference, this is added to your app when it's built. -->
+        <script src="cordova.js"></script>
+        <script src="scripts/platformOverrides.js"></script>
+        <script src="scripts/reader.js"></script>
+        <script src="scripts/typings/swiper/swiper.js"></script>
+
+        <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+
+        <script>
+
+            var swiper = new Swiper('.swiper-container',
+                {
+                    preloadImages : true
+                });
+
+            // Add one more handler for this event
+            swiper.on('onSlideChangeEnd', function ()
+            {
+                window.scrollTo(0, 0);
+            });
+
+        </script>
+
+</body>
+
+</html>
