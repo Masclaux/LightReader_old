@@ -21,7 +21,7 @@ module LightReader
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
 
-            // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
+            // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.                      
         }
 
         function onPause()
