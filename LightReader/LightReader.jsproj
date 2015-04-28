@@ -111,6 +111,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\swiper.css" />
+    <Content Include="scripts\typings\jquery\jquery.js" />
     <Content Include="scripts\typings\swiper\swiper.js" />
     <Folder Include="images\" />
     <Content Include="css\reader.css" />

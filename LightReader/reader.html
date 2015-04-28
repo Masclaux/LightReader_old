@@ -10,7 +10,7 @@
     <!-- LightReader references -->
     <link href="css/reader.css" rel="stylesheet" />
 
-  
+
 
 </head>
 <body>
@@ -110,31 +110,29 @@
         </div>
     </div>
 
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
 
+    <script src="scripts/typings/jquery/jquery.js"></script>
 
+    <script src="scripts/reader.js"></script>
+    <script src="scripts/model/NovelContent.js"></script>    
+    <script src="scripts/typings/swiper/swiper.js"></script>
 
-        <!-- Cordova reference, this is added to your app when it's built. -->
-        <script src="cordova.js"></script>
-        <script src="scripts/platformOverrides.js"></script>
-        <script src="scripts/reader.js"></script>
-        <script src="scripts/typings/swiper/swiper.js"></script>
+    <script>
 
-        <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
-
-        <script>
-
-            var swiper = new Swiper('.swiper-container',
-                {
-                    preloadImages : true
-                });
-
-            // Add one more handler for this event
-            swiper.on('onSlideChangeEnd', function ()
+        var swiper = new Swiper('.swiper-container',
             {
-                window.scrollTo(0, 0);
+                preloadImages: true
             });
 
-        </script>
+        // Add one more handler for this event
+        swiper.on('onSlideChangeEnd', function () {
+            window.scrollTo(0, 0);
+        });
+
+    </script>
 
 </body>
 

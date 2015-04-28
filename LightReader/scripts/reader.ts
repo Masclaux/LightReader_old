@@ -1,4 +1,5 @@
 ﻿/// <reference path="model/NovelContent.ts"/>
+/// <reference path="typings/jquery/jquery.d.ts"/>
 
 module LightReader {
     "use strict";
@@ -24,22 +25,21 @@ module LightReader {
         console.error("onload");
 
         initialize();
-        loadNovel();
+        
+        $.get("http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1").done(OnContentOk);        
     }
 
- 
-
-    function loadNovel() {
-        
+    function OnContentOk( data )
+    {
         var content = new NovelContent();
         content.content = "Hello";
         content.currentPage = 0;
         content.lastPos = 0;
 
 
-        document.body.innerHTML = "<body>" + content.content +"</body>";
-        
+        document.body.innerHTML = "<body>" + data + "</body>";
     }
+
 
 }
 
