@@ -1,15 +1,12 @@
 ﻿body {
     background: #eee;
-           position: relative;
-        height: 100%;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.swiper-slide 
-{    
-    height: auto;
-}   
-
+.swiper-slide {
+   height: 100%;
+   overflow: auto;
+}
 
 #footer {
     text-align: right;

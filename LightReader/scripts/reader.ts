@@ -1,4 +1,6 @@
 ﻿/// <reference path="model/NovelContent.ts"/>
+/// <reference path="parser/BakaTsuki.ts"/>
+
 /// <reference path="typings/jquery/jquery.d.ts"/>
 
 module LightReader {
@@ -25,19 +27,16 @@ module LightReader {
         console.error("onload");
 
         initialize();
-        
+
         $.get("http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1").done(OnContentOk);        
     }
 
     function OnContentOk( data )
     {
         var content = new NovelContent();
-        content.content = "Hello";
-        content.currentPage = 0;
-        content.lastPos = 0;
+        BakaTsukiParser.Parse(content, data);
 
-
-        document.body.innerHTML = "<body>" + data + "</body>";
+        document.body.innerHTML = "<body>" + "test" + "</body>";
     }
 
 

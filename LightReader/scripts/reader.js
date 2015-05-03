@@ -1,4 +1,5 @@
 /// <reference path="model/NovelContent.ts"/>
+/// <reference path="parser/BakaTsuki.ts"/>
 /// <reference path="typings/jquery/jquery.d.ts"/>
 var LightReader;
 (function (LightReader) {
@@ -20,17 +21,8 @@ var LightReader;
     };
     function OnContentOk(data) {
         var content = new LightReader.NovelContent();
-        content.content = "Hello";
-        content.currentPage = 0;
-        content.lastPos = 0;
-        document.body.innerHTML = "<body>" + data + "</body>";
-    }
-    function loadNovel() {
-        var content = new LightReader.NovelContent();
-        content.content = "Hello";
-        content.currentPage = 0;
-        content.lastPos = 0;
-        document.body.innerHTML = "<body>" + content.content + "</body>";
+        LightReader.BakaTsukiParser.Parse(content, data);
+        document.body.innerHTML = "<body>" + "test" + "</body>";
     }
 })(LightReader || (LightReader = {}));
 //# sourceMappingURL=reader.js.map

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title></title>
 
     <!-- Link Swiper's CSS -->
@@ -76,9 +77,7 @@
                 <div id="footer"> 1 </div>
             </div>
 
-            <div class="swiper-slide">
-                <img src='http://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg' style="width:100%" />
-            </div>
+
 
             <div class="swiper-slide">
 
@@ -100,6 +99,12 @@
                 <p>pppppp</p>
                 <div id="footer"> 2 </div>
             </div>
+
+            <div class="swiper-slide">
+                <img src='http://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg' style="width:100%" />
+            </div>
+
+
             <div class="swiper-slide">
                 <img src='http://www.startyourdev.com/images/exemple-css-background.png' style="width:100%" />
             </div>
@@ -115,21 +120,40 @@
     <script src="scripts/platformOverrides.js"></script>
 
     <script src="scripts/typings/jquery/jquery.js"></script>
+    <script src="scripts/typings/swiper/swiper.js"></script>
 
+
+    <!--Typescript-->
     <script src="scripts/reader.js"></script>
     <script src="scripts/model/NovelContent.js"></script>    
-    <script src="scripts/typings/swiper/swiper.js"></script>
+    <script src="scripts/parser/BakaTsuki.js"></script>   
 
     <script>
 
         var swiper = new Swiper('.swiper-container',
             {
-                preloadImages: true
+                preloadImages: true,
             });
 
         // Add one more handler for this event
-        swiper.on('onSlideChangeEnd', function () {
+        swiper.on('onSlideChangeStart', function (p)
+        {            
+            var activeSlideHeight = p.slides.eq(p.activeIndex).height();
+            p.container.css({ height: activeSlideHeight + 'px' });
+
+            console.log(activeSlideHeight);
+
+        });
+
+
+        // Add one more handler for this event
+        swiper.on('onSlideChangeEnd', function (p) {
+
             window.scrollTo(0, 0);
+
+            var activeSlideHeight = p.slides.eq(p.activeIndex).height();
+            p.container.css({ height: window.innerHeight + 'px' });
+
         });
 
     </script>
