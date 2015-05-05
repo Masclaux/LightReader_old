@@ -21,8 +21,9 @@ var LightReader;
     };
     function OnContentOk(data) {
         var content = new LightReader.NovelContent();
-        LightReader.BakaTsukiParser.Parse(content, data);
-        document.body.innerHTML = "<body>" + "test" + "</body>";
+        var parser = new LightReader.BakaTsukiParser();
+        parser.Parse(content, data);
+        // document.body.innerHTML = "<body>" + "test" + "</body>";
     }
 })(LightReader || (LightReader = {}));
 //# sourceMappingURL=reader.js.map

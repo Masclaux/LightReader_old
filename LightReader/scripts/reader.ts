@@ -34,7 +34,9 @@ module LightReader {
     function OnContentOk( data )
     {
         var content = new NovelContent();
-        BakaTsukiParser.Parse(content, data);
+
+        var parser = new BakaTsukiParser();
+        parser.Parse(content, data);
 
         document.body.innerHTML = "<body>" + "test" + "</body>";
     }

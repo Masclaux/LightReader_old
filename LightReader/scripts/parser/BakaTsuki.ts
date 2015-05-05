@@ -5,7 +5,7 @@ module LightReader
 {
     export class BakaTsukiParser 
     {
-        public static Parse(model: NovelContent, content: string)
+        public Parse(model: NovelContent, content: string)
         {
             console.info("Start parsing light novel volume");
             var res = $.parseHTML(content);
@@ -24,15 +24,24 @@ module LightReader
 
                 });
 
-
-                BakaTsukiParser.GetChapter(content);
+                $.get("http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Prologue").done
+                    (
+                        $.proxy(this.OnContentOk, this)
+                    );
+               
             }
 
         }
 
-        public static GetChapter(content: string)
+        public OnContentOk(data)
         {
-            console.info("Get Chapter");
+            this.GetChapter(data);
+        }
+
+
+        public GetChapter(content: string)
+        {
+            console.info("Get Chapter " + content);
         }
     }
 }
