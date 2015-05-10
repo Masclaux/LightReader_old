@@ -28,17 +28,18 @@ module LightReader {
 
         initialize();
 
-        $.get("http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1").done(OnContentOk);        
-    }
-
-    function OnContentOk( data )
-    {
-        var content = new NovelContent();
+       // $.get("http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1").done(OnContentOk);        
 
         var parser = new BakaTsukiParser();
-        parser.Parse(content, data);
+        parser.onParsingComplete = onParsingComplete;
+        parser.Parse("");
+    }
 
-        document.body.innerHTML = "<body>" + "test" + "</body>";
+    function onParsingComplete(parser: BakaTsukiParser )
+    {
+        console.log("1");
+        document.body.innerHTML = "<body>" + parser.model.chapterList[0].pages[0] + "</body>";
+        console.log("2");
     }
 
 

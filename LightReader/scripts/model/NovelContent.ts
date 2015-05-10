@@ -1,12 +1,20 @@
 ﻿module LightReader {
         
-    export class NovelContent {        
+    export class NovelContent 
+    {
+        public title: string;
+        
+        public chapterList: Array<NovelChapter>;   
 
         public currentPage: Number;
 
         public lastPos: Number;
-        
-        public content: String;               
     }
 
+    export class NovelChapter
+    {
+        public title: string;
+
+        public pages: Array<String>;  
+    }
 }
