@@ -30,28 +30,27 @@ module LightReader
                     //console.log("found : " + title + " - " + link);
                 });
             }
-
                 this.model = new NovelContent();
 
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Illustrations
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Prologue
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_1
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_2
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_3
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_4
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_5
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_6
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_7
-                //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Epilogue
-
+               //Volume_1_Illustrations
+               //Volume_1_Prologue
+               //Volume_1_Chapter_1
+               //Volume_1_Chapter_2
+               //Volume_1_Chapter_3
+               //Volume_1_Chapter_4
+               //Volume_1_Chapter_5
+               //Volume_1_Chapter_6
+               //Volume_1_Chapter_7
+               //Volume_1_Epilogue
+          
                 this.model.title = "Absolute_Duo";
                 this.model.chapterList = new Array<NovelChapter>();
                 
                 var chapter: NovelChapter = new NovelChapter();
-                chapter.title = "Volume_1_Illustrations";
-                this.model.chapterList.push(chapter);/*
+                chapter.title = "Volume_1_Chapter_1";
+                this.model.chapterList.push(chapter);
 
-                chapter = new NovelChapter();
+                /*chapter = new NovelChapter();
                 chapter.title = "Volume_1_Prologue";
                 this.model.chapterList.push(chapter);
 
@@ -96,10 +95,6 @@ module LightReader
                        $.proxy(this.OnContentOk, this)
                     );
                 }                            
-           
-
-
-            console.log("3");
         }
 
         public OnContentOk(data)
@@ -122,7 +117,6 @@ module LightReader
             var res = $.parseHTML(content);
             if (res != null)
             {
-
                 console.info("Parsing summary");
 
                 var summary = $(res).find("#mw-content-text").find('h2,h3,p,div.thumb.tright,div.thumb');
@@ -152,6 +146,9 @@ module LightReader
                         case 'DIV':
                             this.model.chapterList[0].pages.push(currentImage);
                             currentImage++;   
+
+                            this.parseImage2(value);
+
                             break;
                     }
 
@@ -175,7 +172,7 @@ module LightReader
             $.getJSON(BakaTsukiParser.IMAGE_QUERY +"Absolute_Duo:Volume_1_Illustrations").done
                 (
                     $.proxy(this.parseImage, this)
-                );            
+                );           
         }
 
         public parseImage(data)
@@ -190,6 +187,43 @@ module LightReader
             }
             
             this.onParsingComplete(this);
+        }
+
+
+        public parseImage2(link): string
+        {
+            console.info("Image found start parsing");
+
+            var fileUrl: string = "";
+
+
+            var res = link;//$.parseHTML(link);
+            if (res != null)
+            {
+                var url = $(res).find("a.image").prop('href');
+                if (url != null)
+                {
+                    var test = url.split(",");
+                    if (test.length > 0)
+                    {
+                        test = test[0].split("/");
+                        for (var c in test)
+                        {
+                            if (test[c] != "thumb")
+                            {
+                                fileUrl += "/" + test[c];
+
+                                if (test[c].indexOf(".") != -1) //we found the file ? 
+                                {
+                                    break; // yes so we quit the loop
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return "http://www.baka-tsuki.org" + fileUrl;
         }
     }
 }

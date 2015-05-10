@@ -18,62 +18,25 @@ var LightReader;
                 });
             }
             this.model = new LightReader.NovelContent();
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Illustrations
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Prologue
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_1
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_2
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_3
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_4
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_5
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_6
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Chapter_7
-            //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Epilogue
+            //Volume_1_Illustrations
+            //Volume_1_Prologue
+            //Volume_1_Chapter_1
+            //Volume_1_Chapter_2
+            //Volume_1_Chapter_3
+            //Volume_1_Chapter_4
+            //Volume_1_Chapter_5
+            //Volume_1_Chapter_6
+            //Volume_1_Chapter_7
+            //Volume_1_Epilogue
             this.model.title = "Absolute_Duo";
             this.model.chapterList = new Array();
             var chapter = new LightReader.NovelChapter();
-            chapter.title = "Volume_1_Illustrations";
-            this.model.chapterList.push(chapter); /*
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Prologue";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
             chapter.title = "Volume_1_Chapter_1";
             this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Chapter_2";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Chapter_3";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Chapter_4";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Chapter_5";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Chapter_6";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Chapter_7";
-            this.model.chapterList.push(chapter);
-
-            chapter = new NovelChapter();
-            chapter.title = "Volume_1_Epilogue";
-            this.model.chapterList.push(chapter);*/
             for (var c in this.model.chapterList) {
                 var chapter = this.model.chapterList[c];
                 $.get("http://www.baka-tsuki.org/project/index.php?title=" + this.model.title + ":" + chapter.title).done($.proxy(this.OnContentOk, this));
             }
-            console.log("3");
         };
         BakaTsukiParser.prototype.OnContentOk = function (data) {
             this.GetChapter(data);
@@ -108,6 +71,7 @@ var LightReader;
                         case 'DIV':
                             this.model.chapterList[0].pages.push(currentImage);
                             currentImage++;
+                            this.parseImage2(value);
                             break;
                     }
                     tempWords += value.firstChild.textContent.split(" ").length;
@@ -131,6 +95,29 @@ var LightReader;
                 this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
             }
             this.onParsingComplete(this);
+        };
+        BakaTsukiParser.prototype.parseImage2 = function (link) {
+            console.info("Image found start parsing");
+            var fileUrl = "";
+            var res = link; //$.parseHTML(link);
+            if (res != null) {
+                var url = $(res).find("a.image").prop('href');
+                if (url != null) {
+                    var test = url.split(",");
+                    if (test.length > 0) {
+                        test = test[0].split("/");
+                        for (var c in test) {
+                            if (test[c] != "thumb") {
+                                fileUrl += "/" + test[c];
+                                if (test[c].indexOf(".") != -1) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return "http://www.baka-tsuki.org" + fileUrl;
         };
         BakaTsukiParser.IMAGE_QUERY = "http://www.baka-tsuki.org/project/api.php?action=query&generator=images&prop=imageinfo&iiprop=url|dimensions|mime&format=json&titles=";
         return BakaTsukiParser;
