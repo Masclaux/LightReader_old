@@ -15,6 +15,8 @@
     {
         public title: string;
 
-        public pages: Array<String>;  
+        public images: Array<string>;         
+
+        public pages: Array<string>;  
     }
 }

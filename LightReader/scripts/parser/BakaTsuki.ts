@@ -6,6 +6,9 @@ module LightReader
     export class BakaTsukiParser 
     {
 
+        public static IMAGE_QUERY: string =
+        "http://www.baka-tsuki.org/project/api.php?action=query&generator=images&prop=imageinfo&iiprop=url|dimensions|mime&format=json&titles=";
+
         public onParsingComplete;
 
         public model: NovelContent;
@@ -44,17 +47,17 @@ module LightReader
                 this.model.title = "Absolute_Duo";
                 this.model.chapterList = new Array<NovelChapter>();
                 
-               /* var chapter: NovelChapter = new NovelChapter();
+                var chapter: NovelChapter = new NovelChapter();
                 chapter.title = "Volume_1_Illustrations";
-                this.model.chapterList.push(chapter);
+                this.model.chapterList.push(chapter);/*
 
                 chapter = new NovelChapter();
                 chapter.title = "Volume_1_Prologue";
-                this.model.chapterList.push(chapter);*/
+                this.model.chapterList.push(chapter);
 
                 chapter = new NovelChapter();
                 chapter.title = "Volume_1_Chapter_1";
-                this.model.chapterList.push(chapter);/*
+                this.model.chapterList.push(chapter);
 
                 chapter = new NovelChapter();
                 chapter.title = "Volume_1_Chapter_2";
@@ -108,18 +111,21 @@ module LightReader
         {
             console.info("Parsing Chapter");
 
+            var firstPartNotFound = false;
+
             var tempParaText: string = "";
             var currentImage: number = 0;
             var tempWords: number    = 0; 
 
-            this.model.chapterList[0].pages = new Array<String>();
+            this.model.chapterList[0].pages = new Array<string>();
 
             var res = $.parseHTML(content);
             if (res != null)
             {
+
                 console.info("Parsing summary");
 
-                var summary = $(res).find('h2,h3,p,div.thumb.tright');
+                var summary = $(res).find("#mw-content-text").find('h2,h3,p,div.thumb.tright,div.thumb');
                 summary.each($.proxy(function (index, value)
                 {   
                     switch (value.nodeName)
@@ -129,15 +135,23 @@ module LightReader
                             break;
 
                         case 'H3':
+                            if (this.model.chapterList[0].pages.length > 0)
+                            {
+                                this.model.chapterList[0].pages.push(tempParaText);
+                                tempWords = 0;
+                                tempParaText = "";
+                            }
+
                             tempParaText += "<h3>" + value.firstChild.textContent + "</h3>";
                             break;
 
                         case 'P':
                             tempParaText += "<P>" + value.firstChild.textContent + "</P>";
                             break;
+
                         case 'DIV':
-                            this.model.chapterList[0].pages.push(currentImage.toString());
-                            this.currentImage++;
+                            this.model.chapterList[0].pages.push(currentImage);
+                            currentImage++;   
                             break;
                     }
 
@@ -148,12 +162,34 @@ module LightReader
                         tempWords    = 0;                        
                         tempParaText = "";
                     }
-                },this));
+                }, this));
+
+                if (tempParaText != "")
+                {
+                    this.model.chapterList[0].pages.push(tempParaText);
+                }
+
             }
 
+            //get all image from chapter 
+            $.getJSON(BakaTsukiParser.IMAGE_QUERY +"Absolute_Duo:Volume_1_Illustrations").done
+                (
+                    $.proxy(this.parseImage, this)
+                );            
+        }
 
+        public parseImage(data)
+        {
+            console.info("Image found start parsing");
+
+            this.model.chapterList[0].images = new Array<string>();
+
+            for (var index in data.query.pages)
+            {
+                this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url );
+            }
+            
             this.onParsingComplete(this);
-
         }
     }
 }

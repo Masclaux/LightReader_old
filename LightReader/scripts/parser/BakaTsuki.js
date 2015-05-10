@@ -30,16 +30,17 @@ var LightReader;
             //http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1_Epilogue
             this.model.title = "Absolute_Duo";
             this.model.chapterList = new Array();
-            /* var chapter: NovelChapter = new NovelChapter();
-             chapter.title = "Volume_1_Illustrations";
-             this.model.chapterList.push(chapter);
-
-             chapter = new NovelChapter();
-             chapter.title = "Volume_1_Prologue";
-             this.model.chapterList.push(chapter);*/
-            chapter = new LightReader.NovelChapter();
-            chapter.title = "Volume_1_Chapter_1";
+            var chapter = new LightReader.NovelChapter();
+            chapter.title = "Volume_1_Illustrations";
             this.model.chapterList.push(chapter); /*
+
+            chapter = new NovelChapter();
+            chapter.title = "Volume_1_Prologue";
+            this.model.chapterList.push(chapter);
+
+            chapter = new NovelChapter();
+            chapter.title = "Volume_1_Chapter_1";
+            this.model.chapterList.push(chapter);
 
             chapter = new NovelChapter();
             chapter.title = "Volume_1_Chapter_2";
@@ -79,6 +80,7 @@ var LightReader;
         };
         BakaTsukiParser.prototype.GetChapter = function (content) {
             console.info("Parsing Chapter");
+            var firstPartNotFound = false;
             var tempParaText = "";
             var currentImage = 0;
             var tempWords = 0;
@@ -86,21 +88,26 @@ var LightReader;
             var res = $.parseHTML(content);
             if (res != null) {
                 console.info("Parsing summary");
-                var summary = $(res).find('h2,h3,p,div.thumb.tright');
+                var summary = $(res).find("#mw-content-text").find('h2,h3,p,div.thumb.tright,div.thumb');
                 summary.each($.proxy(function (index, value) {
                     switch (value.nodeName) {
                         case 'H2':
                             tempParaText += "<h2>" + value.firstChild.textContent + "</h2>";
                             break;
                         case 'H3':
+                            if (this.model.chapterList[0].pages.length > 0) {
+                                this.model.chapterList[0].pages.push(tempParaText);
+                                tempWords = 0;
+                                tempParaText = "";
+                            }
                             tempParaText += "<h3>" + value.firstChild.textContent + "</h3>";
                             break;
                         case 'P':
                             tempParaText += "<P>" + value.firstChild.textContent + "</P>";
                             break;
                         case 'DIV':
-                            this.model.chapterList[0].pages.push(currentImage.toString());
-                            this.currentImage++;
+                            this.model.chapterList[0].pages.push(currentImage);
+                            currentImage++;
                             break;
                     }
                     tempWords += value.firstChild.textContent.split(" ").length;
@@ -110,9 +117,22 @@ var LightReader;
                         tempParaText = "";
                     }
                 }, this));
+                if (tempParaText != "") {
+                    this.model.chapterList[0].pages.push(tempParaText);
+                }
+            }
+            //get all image from chapter 
+            $.getJSON(BakaTsukiParser.IMAGE_QUERY + "Absolute_Duo:Volume_1_Illustrations").done($.proxy(this.parseImage, this));
+        };
+        BakaTsukiParser.prototype.parseImage = function (data) {
+            console.info("Image found start parsing");
+            this.model.chapterList[0].images = new Array();
+            for (var index in data.query.pages) {
+                this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
             }
             this.onParsingComplete(this);
         };
+        BakaTsukiParser.IMAGE_QUERY = "http://www.baka-tsuki.org/project/api.php?action=query&generator=images&prop=imageinfo&iiprop=url|dimensions|mime&format=json&titles=";
         return BakaTsukiParser;
     })();
     LightReader.BakaTsukiParser = BakaTsukiParser;

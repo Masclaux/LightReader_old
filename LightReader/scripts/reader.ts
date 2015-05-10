@@ -6,6 +6,7 @@
 module LightReader {
     "use strict";
 
+    declare function initSwiper(): void;
 
     function initialize() {
 
@@ -36,12 +37,41 @@ module LightReader {
     }
 
     function onParsingComplete(parser: BakaTsukiParser )
-    {
-        console.log("1");
-        document.body.innerHTML = "<body>" + parser.model.chapterList[0].pages[0] + "</body>";
-        console.log("2");
+    {   
+        
+        var el: HTMLElement = document.getElementById('container');
+      
+        var str: string = '<div class="swiper-container"><div class="swiper-wrapper">';
+        var currentImage = -1;
+
+        var center: string = "";
+        for (var c in parser.model.chapterList[0].pages)
+        {
+            //image found 
+            currentImage = parseInt(parser.model.chapterList[0].pages[c]);
+            if (currentImage != -1)
+            {
+                center = "<img src='" + parser.model.chapterList[0].images[currentImage] + "'style='width:100%'/>";
+
+                console.log(parser.model.chapterList[0].images[currentImage]);
+            }
+            else
+            {
+                center = parser.model.chapterList[0].pages[c];
+            }   
+            
+            str += '<div class="swiper-slide" >'
+            +  center
+            + '<div id="footer" >' + (parseInt(c) + 1) + '</div>'
+            + '</div>';        
+        }
+
+        str += '</div></div>';
+              
+         
+        el.innerHTML = str;  
+
+        initSwiper();
     }
-
-
 }
 
