@@ -4,6 +4,7 @@ var LightReader;
 (function (LightReader) {
     var BakaTsukiParser = (function () {
         function BakaTsukiParser() {
+            this.intNbImageDown = 0;
         }
         BakaTsukiParser.prototype.Parse = function (content) {
             console.info("Start parsing light novel volume");
@@ -31,7 +32,7 @@ var LightReader;
             this.model.title = "Absolute_Duo";
             this.model.chapterList = new Array();
             var chapter = new LightReader.NovelChapter();
-            chapter.title = "Volume_1_Chapter_1";
+            chapter.title = "Volume_1_Illustrations";
             this.model.chapterList.push(chapter);
             for (var c in this.model.chapterList) {
                 var chapter = this.model.chapterList[c];
@@ -48,6 +49,7 @@ var LightReader;
             var currentImage = 0;
             var tempWords = 0;
             this.model.chapterList[0].pages = new Array();
+            this.model.chapterList[0].images = new Array();
             var res = $.parseHTML(content);
             if (res != null) {
                 console.info("Parsing summary");
@@ -71,7 +73,7 @@ var LightReader;
                         case 'DIV':
                             this.model.chapterList[0].pages.push(currentImage);
                             currentImage++;
-                            this.parseImage2(value);
+                            this.model.chapterList[0].images.push(this.parseImage(value));
                             break;
                     }
                     tempWords += value.firstChild.textContent.split(" ").length;
@@ -85,31 +87,34 @@ var LightReader;
                     this.model.chapterList[0].pages.push(tempParaText);
                 }
             }
-            //get all image from chapter 
-            $.getJSON(BakaTsukiParser.IMAGE_QUERY + "Absolute_Duo:Volume_1_Illustrations").done($.proxy(this.parseImage, this));
-        };
-        BakaTsukiParser.prototype.parseImage = function (data) {
-            console.info("Image found start parsing");
-            this.model.chapterList[0].images = new Array();
-            for (var index in data.query.pages) {
-                this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
+            for (var i in this.model.chapterList[0].images) {
+                $.getJSON(BakaTsukiParser.IMAGE_QUERY + this.model.chapterList[0].images[i] + "&").done($.proxy(this.onGetImage, this));
             }
-            this.onParsingComplete(this);
+            // this.onParsingComplete(this);    
         };
-        BakaTsukiParser.prototype.parseImage2 = function (link) {
-            console.info("Image found start parsing");
+        BakaTsukiParser.prototype.onGetImage = function (data) {
+            console.info("Try to parse : " + data);
+            for (var index in data.query.pages) {
+                //this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
+                console.info(data.query.pages[index].imageinfo[0].url);
+            }
+            // this.onParsingComplete(this);    
+        };
+        BakaTsukiParser.prototype.parseImage = function (link) {
             var fileUrl = "";
-            var res = link; //$.parseHTML(link);
-            if (res != null) {
-                var url = $(res).find("a.image").prop('href');
+            if (link != null) {
+                var url = $(link).find("a.image").attr('href');
                 if (url != null) {
-                    var test = url.split(",");
-                    if (test.length > 0) {
-                        test = test[0].split("/");
-                        for (var c in test) {
-                            if (test[c] != "thumb") {
-                                fileUrl += "/" + test[c];
-                                if (test[c].indexOf(".") != -1) {
+                    var splitUrl = url.split(","); // in read 
+                    if (splitUrl.length > 0) {
+                        splitUrl = splitUrl[0].split("/");
+                        for (var c in splitUrl) {
+                            if (splitUrl[c] != "thumb") {
+                                if (splitUrl[c].indexOf(".") != -1) {
+                                    var finalUrl = splitUrl[c].split("File:"); //get only page name
+                                    if (finalUrl.length > 0) {
+                                        fileUrl = finalUrl[1]; //right part
+                                    }
                                     break;
                                 }
                             }
@@ -117,9 +122,10 @@ var LightReader;
                     }
                 }
             }
-            return "http://www.baka-tsuki.org" + fileUrl;
+            //console.info("Found Image : " + fileUrl);
+            return fileUrl;
         };
-        BakaTsukiParser.IMAGE_QUERY = "http://www.baka-tsuki.org/project/api.php?action=query&generator=images&prop=imageinfo&iiprop=url|dimensions|mime&format=json&titles=";
+        BakaTsukiParser.IMAGE_QUERY = "http://www.baka-tsuki.org/project/api.php?action=query&prop=imageinfo&iiprop=url&format=json&titles=File:";
         return BakaTsukiParser;
     })();
     LightReader.BakaTsukiParser = BakaTsukiParser;

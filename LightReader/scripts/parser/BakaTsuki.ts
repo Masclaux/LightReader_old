@@ -5,13 +5,14 @@ module LightReader
 {
     export class BakaTsukiParser 
     {
-
         public static IMAGE_QUERY: string =
-        "http://www.baka-tsuki.org/project/api.php?action=query&generator=images&prop=imageinfo&iiprop=url|dimensions|mime&format=json&titles=";
+        "http://www.baka-tsuki.org/project/api.php?action=query&prop=imageinfo&iiprop=url&format=json&titles=File:";
 
         public onParsingComplete;
 
         public model: NovelContent;
+
+        private intNbImageDown = 0;
 
         public Parse(content: string)
         {
@@ -47,44 +48,9 @@ module LightReader
                 this.model.chapterList = new Array<NovelChapter>();
                 
                 var chapter: NovelChapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_1";
+                chapter.title = "Volume_1_Illustrations";
                 this.model.chapterList.push(chapter);
-
-                /*chapter = new NovelChapter();
-                chapter.title = "Volume_1_Prologue";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_1";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_2";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_3";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_4";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_5";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_6";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Chapter_7";
-                this.model.chapterList.push(chapter);
-
-                chapter = new NovelChapter();
-                chapter.title = "Volume_1_Epilogue";
-                this.model.chapterList.push(chapter);*/
+                
                
                 for (var c in this.model.chapterList)
                 {
@@ -112,7 +78,8 @@ module LightReader
             var currentImage: number = 0;
             var tempWords: number    = 0; 
 
-            this.model.chapterList[0].pages = new Array<string>();
+            this.model.chapterList[0].pages  = new Array<string>();
+            this.model.chapterList[0].images = new Array<string>();
 
             var res = $.parseHTML(content);
             if (res != null)
@@ -146,9 +113,8 @@ module LightReader
                         case 'DIV':
                             this.model.chapterList[0].pages.push(currentImage);
                             currentImage++;   
-
-                            this.parseImage2(value);
-
+                            
+                            this.model.chapterList[0].images.push(this.parseImage(value));
                             break;
                     }
 
@@ -169,52 +135,53 @@ module LightReader
             }
 
             //get all image from chapter 
-            $.getJSON(BakaTsukiParser.IMAGE_QUERY +"Absolute_Duo:Volume_1_Illustrations").done
-                (
-                    $.proxy(this.parseImage, this)
-                );           
+            for (var i in this.model.chapterList[0].images )
+            {             
+                $.getJSON(BakaTsukiParser.IMAGE_QUERY + this.model.chapterList[0].images[i] +"&" ).done //avoir warning with & at the end ><
+                    (
+                       $.proxy(this.onGetImage, this)
+                    );
+            }
+            
+           // this.onParsingComplete(this);    
         }
 
-        public parseImage(data)
-        {
-            console.info("Image found start parsing");
-
-            this.model.chapterList[0].images = new Array<string>();
+        public onGetImage(data)
+        {  
+            console.info("Try to parse : " + data);
 
             for (var index in data.query.pages)
             {
-                this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url );
+                //this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
+                console.info(data.query.pages[index].imageinfo[0].url); 
             }
-            
-            this.onParsingComplete(this);
+           
+           // this.onParsingComplete(this);    
         }
-
-
-        public parseImage2(link): string
-        {
-            console.info("Image found start parsing");
-
+        
+        public parseImage(link): string
+        {    
             var fileUrl: string = "";
-
-
-            var res = link;//$.parseHTML(link);
-            if (res != null)
+            if (link != null)
             {
-                var url = $(res).find("a.image").prop('href');
+                var url = $(link).find("a.image").attr('href');
                 if (url != null)
                 {
-                    var test = url.split(",");
-                    if (test.length > 0)
+                    var splitUrl = url.split(","); // in read 
+                    if (splitUrl.length > 0)
                     {
-                        test = test[0].split("/");
-                        for (var c in test)
+                        splitUrl = splitUrl[0].split("/");
+                        for (var c in splitUrl)
                         {
-                            if (test[c] != "thumb")
-                            {
-                                fileUrl += "/" + test[c];
-
-                                if (test[c].indexOf(".") != -1) //we found the file ? 
+                            if (splitUrl[c] != "thumb")
+                            {                                
+                                if (splitUrl[c].indexOf(".") != -1) //we found the file ? 
                                 {
+                                    var finalUrl = splitUrl[c].split("File:"); //get only page name
+                                    if (finalUrl.length > 0)
+                                    {
+                                        fileUrl = finalUrl[1];//right part
+                                    }
                                     break; // yes so we quit the loop
                                 }
                             }
@@ -222,8 +189,10 @@ module LightReader
                     }
                 }
             }
+            
+            console.info("Found Image : " + fileUrl);
 
-            return "http://www.baka-tsuki.org" + fileUrl;
+            return fileUrl;
         }
     }
 }
