@@ -49,7 +49,6 @@ var LightReader;
             var currentImage = 0;
             var tempWords = 0;
             this.model.chapterList[0].pages = new Array();
-            this.model.chapterList[0].images = new Array();
             var res = $.parseHTML(content);
             if (res != null) {
                 console.info("Parsing summary");
@@ -73,7 +72,9 @@ var LightReader;
                         case 'DIV':
                             this.model.chapterList[0].pages.push(currentImage);
                             currentImage++;
-                            this.model.chapterList[0].images.push(this.parseImage(value));
+                            var val = this.parseImage(value);
+                            this.model.chapterList[0].images[val] = new LightReader.NovelImage();
+                            this.model.chapterList[0].images[val].id = val;
                             break;
                     }
                     tempWords += value.firstChild.textContent.split(" ").length;
@@ -87,16 +88,18 @@ var LightReader;
                     this.model.chapterList[0].pages.push(tempParaText);
                 }
             }
-            for (var i in this.model.chapterList[0].images) {
-                $.getJSON(BakaTsukiParser.IMAGE_QUERY + this.model.chapterList[0].images[i] + "&").done($.proxy(this.onGetImage, this));
+            for (var pictureName in this.model.chapterList[0].images) {
+                $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done($.proxy(function (results) {
+                    this.onGetImage(results, pictureName);
+                }, this));
             }
             // this.onParsingComplete(this);    
         };
-        BakaTsukiParser.prototype.onGetImage = function (data) {
-            console.info("Try to parse : " + data);
-            for (var index in data.query.pages) {
+        BakaTsukiParser.prototype.onGetImage = function (results, pictureName) {
+            console.info("Try to parse : " + results);
+            for (var index in results.query.pages) {
                 //this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
-                console.info(data.query.pages[index].imageinfo[0].url);
+                console.info(results.query.pages[index].imageinfo[0].url);
             }
             // this.onParsingComplete(this);    
         };
@@ -122,7 +125,7 @@ var LightReader;
                     }
                 }
             }
-            //console.info("Found Image : " + fileUrl);
+            console.info("Found Image : " + fileUrl);
             return fileUrl;
         };
         BakaTsukiParser.IMAGE_QUERY = "http://www.baka-tsuki.org/project/api.php?action=query&prop=imageinfo&iiprop=url&format=json&titles=File:";

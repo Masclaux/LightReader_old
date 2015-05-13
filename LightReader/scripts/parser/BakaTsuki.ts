@@ -76,10 +76,9 @@ module LightReader
 
             var tempParaText: string = "";
             var currentImage: number = 0;
-            var tempWords: number    = 0; 
+            var tempWords: number = 0; 
 
-            this.model.chapterList[0].pages  = new Array<string>();
-            this.model.chapterList[0].images = new Array<string>();
+            this.model.chapterList[0].pages  = new Array<string>();            
 
             var res = $.parseHTML(content);
             if (res != null)
@@ -113,8 +112,11 @@ module LightReader
                         case 'DIV':
                             this.model.chapterList[0].pages.push(currentImage);
                             currentImage++;   
+
+                            var val = this.parseImage(value);
                             
-                            this.model.chapterList[0].images.push(this.parseImage(value));
+                            this.model.chapterList[0].images[val] = new NovelImage();
+                            this.model.chapterList[0].images[val].id = val;
                             break;
                     }
 
@@ -135,25 +137,25 @@ module LightReader
             }
 
             //get all image from chapter 
-            for (var i in this.model.chapterList[0].images )
+            for( var pictureName in this.model.chapterList[0].images )
             {             
-                $.getJSON(BakaTsukiParser.IMAGE_QUERY + this.model.chapterList[0].images[i] +"&" ).done //avoir warning with & at the end ><
+                $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName +"&" ).done //avoid warning with & at the end ><
                     (
-                       $.proxy(this.onGetImage, this)
+                        $.proxy(function (results) { this.onGetImage( results, pictureName ) }, this)
                     );
             }
             
            // this.onParsingComplete(this);    
         }
 
-        public onGetImage(data)
+        public onGetImage(results, pictureName)
         {  
-            console.info("Try to parse : " + data);
+            console.info("Try to parse : " + results);
 
-            for (var index in data.query.pages)
+            for (var index in results.query.pages)
             {
                 //this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
-                console.info(data.query.pages[index].imageinfo[0].url); 
+                console.info(results.query.pages[index].imageinfo[0].url); 
             }
            
            // this.onParsingComplete(this);    

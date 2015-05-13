@@ -15,8 +15,21 @@
     {
         public title: string;
 
-        public images: Array<string>;         
+        public images: { [id: string]: NovelImage; } = {};        
 
         public pages: Array<string>;  
+    }
+
+    export class NovelImage
+    {
+        public id: string;
+
+        public title: string;
+
+        public url: string;
+
+        public localUrl: string;
+
+        public isLocal:boolean = false;
     }
 }

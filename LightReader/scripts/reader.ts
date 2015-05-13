@@ -50,7 +50,7 @@ module LightReader {
             currentImage = parseInt(parser.model.chapterList[0].pages[c]);
             if ( isNaN(currentImage) == false)
             {
-                center = "<img src='" + parser.model.chapterList[0].images[currentImage] + "'style='width:100%'/>";               
+                center = "<img src='" + parser.model.chapterList[0].images[currentImage].url + "'style='width:100%'/>";               
             }
             else
             {
