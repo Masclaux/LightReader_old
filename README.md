@@ -11,3 +11,4 @@ Just a test to see How cordova and typescript perform.
 ## Libs:
 
 swiper.js => http://www.idangero.us/swiper/
+jquery.js => https://jquery.com/
