@@ -48,7 +48,7 @@ module LightReader
                 this.model.chapterList = new Array<NovelChapter>();
                 
                 var chapter: NovelChapter = new NovelChapter();
-                chapter.title = "Volume_1_Illustrations";
+                chapter.title = "Volume_1_Prologue";
                 this.model.chapterList.push(chapter);
                 
                
@@ -145,7 +145,7 @@ module LightReader
                     );
             }
             
-           // this.onParsingComplete(this);    
+           this.onParsingComplete(this);    
         }
 
         public onGetImage(results, pictureName)
@@ -158,7 +158,7 @@ module LightReader
                 console.info(results.query.pages[index].imageinfo[0].url); 
             }
            
-           // this.onParsingComplete(this);    
+            //this.onParsingComplete(this);    
         }
         
         public parseImage(link): string

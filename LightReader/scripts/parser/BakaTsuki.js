@@ -32,7 +32,7 @@ var LightReader;
             this.model.title = "Absolute_Duo";
             this.model.chapterList = new Array();
             var chapter = new LightReader.NovelChapter();
-            chapter.title = "Volume_1_Illustrations";
+            chapter.title = "Volume_1_Prologue";
             this.model.chapterList.push(chapter);
             for (var c in this.model.chapterList) {
                 var chapter = this.model.chapterList[c];
@@ -93,7 +93,7 @@ var LightReader;
                     this.onGetImage(results, pictureName);
                 }, this));
             }
-            // this.onParsingComplete(this);    
+            this.onParsingComplete(this);
         };
         BakaTsukiParser.prototype.onGetImage = function (results, pictureName) {
             console.info("Try to parse : " + results);
@@ -101,7 +101,7 @@ var LightReader;
                 //this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
                 console.info(results.query.pages[index].imageinfo[0].url);
             }
-            // this.onParsingComplete(this);    
+            //this.onParsingComplete(this);    
         };
         BakaTsukiParser.prototype.parseImage = function (link) {
             var fileUrl = "";
