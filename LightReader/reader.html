@@ -35,19 +35,19 @@
 
     <script>
 
-        function initSwiper() {
+        function initSwiper(vertical)
+        {
+            var directionOpt = vertical ? 'vertical' : 'horizontal';
             var swiper = new Swiper('.swiper-container',
                 {
                     preloadImages: true,
+                    direction: 'horizontal',
                 });
 
             // Add one more handler for this event
             swiper.on('onSlideChangeStart', function (p) {
                 var activeSlideHeight = p.slides.eq(p.activeIndex).height();
                 p.container.css({ height: activeSlideHeight + 'px' });
-
-                console.log(activeSlideHeight);
-
             });
 
 

@@ -6,7 +6,7 @@
 module LightReader {
     "use strict";
 
-    declare function initSwiper(): void;
+    declare function initSwiper(vertical:boolean): void;
 
     function initialize() {
 
@@ -41,16 +41,17 @@ module LightReader {
         var el: HTMLElement = document.getElementById('container');
       
         var str: string = '<div class="swiper-container"><div class="swiper-wrapper">';
-        var currentImage = -1;
 
         var center: string = "";
         for (var c in parser.model.chapterList[0].pages)
         {
             //image found 
-            currentImage = parseInt(parser.model.chapterList[0].pages[c]);
-            if ( isNaN(currentImage) == false)
+            var currentImage:number = parser.model.chapterList[0].pages[c].search("img;;");
+            if (currentImage != -1 )
             {
-                center = "<img src='" + parser.model.chapterList[0].images[currentImage].url + "'style='width:100%'/>";               
+                //get id 
+                var id: string = parser.model.chapterList[0].pages[c].split(";;")[1]; 
+                center = "<img src='" + parser.model.chapterList[0].images[id].url + "'style='width:100%'/>";               
             }
             else
             {
@@ -68,7 +69,7 @@ module LightReader {
          
         el.innerHTML = str;  
 
-        initSwiper();
+        initSwiper(true);
     }
 }
 

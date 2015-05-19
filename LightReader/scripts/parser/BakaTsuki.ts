@@ -12,7 +12,9 @@ module LightReader
 
         public model: NovelContent;
 
-        private intNbImageDown = 0;
+        private nbImageDown:number = 0;
+
+        private nbImageFound: number = 0;
 
         public Parse(content: string)
         {
@@ -48,7 +50,7 @@ module LightReader
                 this.model.chapterList = new Array<NovelChapter>();
                 
                 var chapter: NovelChapter = new NovelChapter();
-                chapter.title = "Volume_1_Prologue";
+                chapter.title = "Volume_1_Chapter_1";
                 this.model.chapterList.push(chapter);
                 
                
@@ -75,8 +77,9 @@ module LightReader
             var firstPartNotFound = false;
 
             var tempParaText: string = "";
-            var currentImage: number = 0;
             var tempWords: number = 0; 
+
+            this.nbImageFound = 0;
 
             this.model.chapterList[0].pages  = new Array<string>();            
 
@@ -110,11 +113,11 @@ module LightReader
                             break;
 
                         case 'DIV':
-                            this.model.chapterList[0].pages.push(currentImage);
-                            currentImage++;   
+                            this.nbImageFound++;   
 
                             var val = this.parseImage(value);
-                            
+
+                            this.model.chapterList[0].pages.push("img;;" + val);                            
                             this.model.chapterList[0].images[val] = new NovelImage();
                             this.model.chapterList[0].images[val].id = val;
                             break;
@@ -141,24 +144,29 @@ module LightReader
             {             
                 $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName +"&" ).done //avoid warning with & at the end ><
                     (
-                        $.proxy(function (results) { this.onGetImage( results, pictureName ) }, this)
+                        $.proxy(function (results) { this.onGetImage( results ) }, this)
                     );
             }
-            
-           this.onParsingComplete(this);    
         }
 
-        public onGetImage(results, pictureName)
+        public onGetImage(results)
         {  
-            console.info("Try to parse : " + results);
+            this.nbImageDown++;
 
+            console.info("Try to parse : " + results);
             for (var index in results.query.pages)
             {
-                //this.model.chapterList[0].images.push(data.query.pages[index].imageinfo[0].url);
-                console.info(results.query.pages[index].imageinfo[0].url); 
+
+                var id: string = results.query.pages[index].imageinfo[0].descriptionurl.split("File:")[1]; 
+                var url: string = results.query.pages[index].imageinfo[0].url;
+
+                this.model.chapterList[0].images[id].url = url;
             }
            
-            //this.onParsingComplete(this);    
+            if (this.nbImageDown == this.nbImageFound)
+            {
+                this.onParsingComplete(this);
+            }
         }
         
         public parseImage(link): string

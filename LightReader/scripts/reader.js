@@ -25,13 +25,14 @@ var LightReader;
     function onParsingComplete(parser) {
         var el = document.getElementById('container');
         var str = '<div class="swiper-container"><div class="swiper-wrapper">';
-        var currentImage = -1;
         var center = "";
         for (var c in parser.model.chapterList[0].pages) {
             //image found 
-            currentImage = parseInt(parser.model.chapterList[0].pages[c]);
-            if (isNaN(currentImage) == false) {
-                center = "<img src='" + parser.model.chapterList[0].images[currentImage].url + "'style='width:100%'/>";
+            var currentImage = parser.model.chapterList[0].pages[c].search("img;;");
+            if (currentImage != -1) {
+                //get id 
+                var id = parser.model.chapterList[0].pages[c].split(";;")[1];
+                center = "<img src='" + parser.model.chapterList[0].images[id].url + "'style='width:100%'/>";
             }
             else {
                 center = parser.model.chapterList[0].pages[c];
@@ -40,7 +41,7 @@ var LightReader;
         }
         str += '</div></div>';
         el.innerHTML = str;
-        initSwiper();
+        initSwiper(true);
     }
 })(LightReader || (LightReader = {}));
 //# sourceMappingURL=reader.js.map
