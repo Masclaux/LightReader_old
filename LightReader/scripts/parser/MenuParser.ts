@@ -7,6 +7,9 @@ module LightReader
         public static LIST_QUERY: string =
         "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(";
 
+        public static VOLUME_QUERY: string =
+        "http://baka-tsuki.org";
+
         public onParsingComplete;
 
         public Parse(lang: string)
@@ -26,15 +29,83 @@ module LightReader
             if (res != null)
             {
                 var table = $(res).find(".mw-content-ltr ul li");
-                table.each(function (index, value)
+                table.each( $.proxy(function (index, value)
                 {    
                     var link  = $(value).find("a").attr("href");
                     var title = $(value).find("a").attr("title");
                                    
-                    console.log("found : " + title + " - " + link);
-                });
+                    //this.ParseVolumes(link, title);
+
+                }, this));
 
             }
+
+            this.ParseVolumes("/project/index.php?title=Zero_no_Tsukaima", "ZERo");
+        }
+
+        private ParseVolumes(url:string, title:string)
+        {
+            console.log("Parse Volumes : " + url + " - " + title);
+
+            var volumeUrl = MenuParser.VOLUME_QUERY + url;
+            $.get(volumeUrl).done
+                (
+                    $.proxy(this.OnVolumeParsed, this)
+                );
+
+        }
+
+        
+        private OnVolumeParsed(res)
+        {
+     
+            var foundH3: boolean = false;
+            var foundH2: boolean = false;
+            var ready: boolean = false;
+
+            var title: string = "test";
+
+            var summary = $(res).find("#mw-content-text").find('h2,h3,a,p');//,p,div.thumb.tright,div.thumb');
+            summary.each($.proxy(function (index, value)
+            {
+                switch (value.nodeName)
+                {
+                    case 'H2':
+                        foundH2 = true;
+                        if (foundH3)
+                        {
+                            foundH3 = false;
+                            foundH2 = false;
+                        }
+                        break;
+
+                    case 'H3': 
+                        if (foundH2)
+                        {
+                            title=value.firstChild.innerHTML;
+                            ready = true
+                        }
+                        break;
+
+                    case "A":
+                        if (ready)
+                        {
+                            console.log(title);
+                            console.log(value.firstChild.textContent);
+                        }
+                        break;
+
+                    case "P":
+                        if (ready)
+                        {
+                            ready = false;
+                        }
+                        break;
+                }
+                               
+            }, this));
+
+
         }
     }
 } 

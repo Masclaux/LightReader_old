@@ -1,6 +1,16 @@
-﻿module LightReader {
-        
-    export class NovelContent 
+﻿module LightReader 
+{     
+
+    export class Novel
+    {
+        public url: string;
+
+        public title: string;
+
+        public volumeList: Array<NovelVolume>;
+    }
+
+    export class NovelVolume 
     {
         public title: string;
         

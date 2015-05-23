@@ -1,11 +1,17 @@
 var LightReader;
 (function (LightReader) {
-    var NovelContent = (function () {
-        function NovelContent() {
+    var Novel = (function () {
+        function Novel() {
         }
-        return NovelContent;
+        return Novel;
     })();
-    LightReader.NovelContent = NovelContent;
+    LightReader.Novel = Novel;
+    var NovelVolume = (function () {
+        function NovelVolume() {
+        }
+        return NovelVolume;
+    })();
+    LightReader.NovelVolume = NovelVolume;
     var NovelChapter = (function () {
         function NovelChapter() {
             this.images = {};

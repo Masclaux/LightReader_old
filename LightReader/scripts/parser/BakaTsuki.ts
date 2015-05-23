@@ -10,7 +10,7 @@ module LightReader
 
         public onParsingComplete;
 
-        public model: NovelContent;
+        public model: NovelVolume;
 
         private nbImageDown:number = 0;
 
@@ -33,7 +33,7 @@ module LightReader
                     //console.log("found : " + title + " - " + link);
                 });
             }
-                this.model = new NovelContent();
+                this.model = new NovelVolume();
 
                //Volume_1_Illustrations
                //Volume_1_Prologue

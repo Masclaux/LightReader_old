@@ -19,7 +19,7 @@ var LightReader;
                     //console.log("found : " + title + " - " + link);
                 });
             }
-            this.model = new LightReader.NovelContent();
+            this.model = new LightReader.NovelVolume();
             //Volume_1_Illustrations
             //Volume_1_Prologue
             //Volume_1_Chapter_1
