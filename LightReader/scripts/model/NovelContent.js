@@ -2,12 +2,14 @@ var LightReader;
 (function (LightReader) {
     var Novel = (function () {
         function Novel() {
+            this.volumeList = new Array();
         }
         return Novel;
     })();
     LightReader.Novel = Novel;
     var NovelVolume = (function () {
         function NovelVolume() {
+            this.chapterList = new Array();
         }
         return NovelVolume;
     })();

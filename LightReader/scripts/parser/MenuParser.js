@@ -3,6 +3,7 @@ var LightReader;
 (function (LightReader) {
     var MenuParser = (function () {
         function MenuParser() {
+            this.volumes = new Array();
         }
         MenuParser.prototype.Parse = function (lang) {
             var listUrl = MenuParser.LIST_QUERY + lang + ")";
@@ -19,7 +20,7 @@ var LightReader;
                     //this.ParseVolumes(link, title);
                 }, this));
             }
-            this.ParseVolumes("/project/index.php?title=Zero_no_Tsukaima", "ZERo");
+            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo");
         };
         MenuParser.prototype.ParseVolumes = function (url, title) {
             console.log("Parse Volumes : " + url + " - " + title);
@@ -30,12 +31,14 @@ var LightReader;
             var foundH3 = false;
             var foundH2 = false;
             var ready = false;
-            var title = "test";
-            var summary = $(res).find("#mw-content-text").find('h2,h3,a,p'); //,p,div.thumb.tright,div.thumb');
+            var firstPass = false;
+            var volumeTitle = "";
+            var volumeUrl = "";
+            var currentNovelVolume = new LightReader.NovelVolume();
+            var summary = $(res).find("#mw-content-text").find('h2,h3,li,p'); //,p,div.thumb.tright,div.thumb');
             summary.each($.proxy(function (index, value) {
                 switch (value.nodeName) {
                     case 'H2':
-                        //console.log(value.firstChild.textContent);
                         foundH2 = true;
                         if (foundH3) {
                             foundH3 = false;
@@ -44,14 +47,31 @@ var LightReader;
                         break;
                     case 'H3':
                         if (foundH2) {
-                            title = value.firstChild.innerHTML;
+                            volumeTitle = $(value).find("span").first().text();
+                            volumeUrl = $(value).find("a").attr("href");
                             ready = true;
                         }
                         break;
-                    case "A":
+                    case "LI":
                         if (ready) {
-                            console.log(title);
-                            console.log(value.firstChild.textContent);
+                            if (currentNovelVolume.title != volumeTitle) {
+                                //new volume 
+                                if (firstPass) {
+                                    this.volumes.push(currentNovelVolume);
+                                }
+                                firstPass = true;
+                                currentNovelVolume = new LightReader.NovelVolume();
+                                currentNovelVolume.url = volumeUrl;
+                                currentNovelVolume.title = volumeTitle;
+                            }
+                            var charpterUrl = $(value).find("a").attr("href");
+                            var charpterTitle = $(value).find("a").first().text();
+                            if (charpterUrl != undefined) {
+                                var chaper = new LightReader.NovelChapter();
+                                chaper.url = charpterUrl;
+                                chaper.title = charpterTitle;
+                                currentNovelVolume.chapterList.push(chaper);
+                            }
                         }
                         break;
                     case "P":
@@ -61,6 +81,13 @@ var LightReader;
                         break;
                 }
             }, this));
+            this.volumes.push(currentNovelVolume);
+            for (var v in this.volumes) {
+                console.log(this.volumes[v].title);
+                for (var c in this.volumes[v].chapterList) {
+                    console.log(this.volumes[v].chapterList[c].title);
+                }
+            }
         };
         MenuParser.LIST_QUERY = "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(";
         MenuParser.VOLUME_QUERY = "http://baka-tsuki.org";

@@ -3,6 +3,11 @@
 
     export class Novel
     {
+        constructor()
+        {
+            this.volumeList = new Array<NovelVolume>();
+        }
+
         public url: string;
 
         public title: string;
@@ -12,7 +17,14 @@
 
     export class NovelVolume 
     {
+        constructor()
+        {
+            this.chapterList = new Array<NovelChapter>();
+        }
+
         public title: string;
+
+        public url: string;
         
         public chapterList: Array<NovelChapter>;   
 
@@ -24,6 +36,8 @@
     export class NovelChapter
     {
         public title: string;
+
+        public url: string;
 
         public images: { [id: string]: NovelImage; } = {};        
 

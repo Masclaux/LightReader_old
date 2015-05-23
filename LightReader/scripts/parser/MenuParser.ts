@@ -12,6 +12,9 @@ module LightReader
 
         public onParsingComplete;
 
+        public volumes: Array<NovelVolume> = new Array<NovelVolume>();   
+
+
         public Parse(lang: string)
         {
             var listUrl = MenuParser.LIST_QUERY + lang + ")";
@@ -40,7 +43,7 @@ module LightReader
 
             }
 
-            this.ParseVolumes("/project/index.php?title=Zero_no_Tsukaima", "ZERo");
+            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo");
         }
 
         private ParseVolumes(url:string, title:string)
@@ -52,23 +55,25 @@ module LightReader
                 (
                     $.proxy(this.OnVolumeParsed, this)
                 );
-
         }
-
         
         private OnVolumeParsed(res)
-        {
-     
+        {     
             var foundH3: boolean = false;
             var foundH2: boolean = false;
             var ready: boolean = false;
 
-            var title: string = "test";
+            var firstPass: boolean = false;
 
-            var summary = $(res).find("#mw-content-text").find('h2,h3,a,p');//,p,div.thumb.tright,div.thumb');
+            var volumeTitle: string = "";
+            var volumeUrl: string = "";
+
+            var currentNovelVolume: NovelVolume = new NovelVolume();
+
+            var summary = $(res).find("#mw-content-text").find('h2,h3,li,p');//,p,div.thumb.tright,div.thumb');
             summary.each($.proxy(function (index, value)
             {
-                switch (value.nodeName)
+                 switch (value.nodeName)
                 {
                     case 'H2':
                         foundH2 = true;
@@ -79,19 +84,45 @@ module LightReader
                         }
                         break;
 
-                    case 'H3': 
+                    case 'H3':
+
                         if (foundH2)
                         {
-                            title=value.firstChild.innerHTML;
+                            volumeTitle = $(value).find("span").first().text();  
+                            volumeUrl   = $(value).find("a").attr("href");  
                             ready = true
                         }
                         break;
 
-                    case "A":
+                    case "LI":
                         if (ready)
                         {
-                            console.log(title);
-                            console.log(value.firstChild.textContent);
+                            if (currentNovelVolume.title != volumeTitle)
+                            {                               
+                                //new volume 
+                                if (firstPass)
+                                {
+                                    this.volumes.push(currentNovelVolume);
+                                }
+
+                                firstPass = true;
+
+                                currentNovelVolume = new NovelVolume();
+                                currentNovelVolume.url = volumeUrl;
+                                currentNovelVolume.title = volumeTitle;
+                            }
+
+                            var charpterUrl:string   = $(value).find("a").attr("href");  
+                            var charpterTitle:string = $(value).find("a").first().text();
+
+                            if (charpterUrl != undefined) // invalid chapter 
+                            {
+                                var chaper: NovelChapter = new NovelChapter();
+                                chaper.url = charpterUrl;
+                                chaper.title = charpterTitle;
+
+                                currentNovelVolume.chapterList.push(chaper);
+                            }
                         }
                         break;
 
@@ -105,7 +136,18 @@ module LightReader
                                
             }, this));
 
+            this.volumes.push(currentNovelVolume);
 
+            for (var v in this.volumes)
+            {
+                console.log(this.volumes[v].title);
+
+                for (var c in this.volumes[v].chapterList)
+                {
+                    console.log(this.volumes[v].chapterList[c].title);
+                }
+            }
+            
         }
     }
 } 
