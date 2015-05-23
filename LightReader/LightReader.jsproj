@@ -111,6 +111,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\swiper.css" />
+    <Content Include="list.html" />
     <Content Include="scripts\typings\jquery\jquery.js" />
     <Content Include="scripts\typings\swiper\swiper.js" />
     <Folder Include="images\" />
@@ -137,8 +138,10 @@
     <Content Include="index.html" />
     <TypeScriptCompile Include="scripts\constant\constant.ts" />
     <TypeScriptCompile Include="scripts\index.ts" />
+    <TypeScriptCompile Include="scripts\list.ts" />
     <TypeScriptCompile Include="scripts\model\NovelContent.ts" />
     <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
+    <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />
     <TypeScriptCompile Include="scripts\platformOverrides.ts" />
     <Content Include="css\index.css" />
     <Content Include="packages.config">
