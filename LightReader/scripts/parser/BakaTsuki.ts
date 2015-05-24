@@ -1,8 +1,6 @@
 ﻿/// <reference path="../model/NovelContent.ts"/>
 /// <reference path="../typings/jquery/jquery.d.ts"/>
 /// <reference path="../model/NovelVolume.ts"/>
-
-
 module LightReader
 {
     export class BakaTsukiParser 

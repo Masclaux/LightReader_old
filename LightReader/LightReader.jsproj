@@ -100,25 +100,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>ce5e60a1-9c6f-41b6-b849-534400acd66f</ProjectGuid>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <ProjectGuid>95bb5cb9-92d2-4219-8bcd-b3867369063e</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0'">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="css\reader.css" />
     <Content Include="css\swiper.css" />
-    <Content Include="list.html" />
-    <Content Include="reader.html" />
     <Content Include="scripts\typings\jquery\jquery.js" />
     <Content Include="scripts\typings\swiper\swiper.js" />
-    <Content Include="scripts\view\main.html" />
-    <Content Include="scripts\view\read.html" />
     <Folder Include="images\" />
-    <Content Include="css\reader.css" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
     <Content Include="merges\android\scripts\platformOverrides.js" />
     <Folder Include="merges\ios\" />
@@ -133,28 +126,14 @@
     <Folder Include="res\screens\ios\" />
     <Folder Include="res\screens\windows\" />
     <Folder Include="res\screens\wp8\" />
-    <Folder Include="scripts\viewmodel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="index.html" />
-    <TypeScriptCompile Include="scripts\constant\constant.ts" />
-    <TypeScriptCompile Include="scripts\index.ts" />
-    <TypeScriptCompile Include="scripts\list.ts" />
-    <TypeScriptCompile Include="scripts\model\AppModel.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelChapter.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelContent.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelImage.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelVolume.ts" />
-    <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
-    <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />
-    <TypeScriptCompile Include="scripts\platformOverrides.ts" />
     <Content Include="css\index.css" />
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="packages.config" />
     <Content Include="res\icons\android\icon-36-ldpi.png" />
     <Content Include="res\icons\android\icon-48-mdpi.png" />
     <Content Include="res\icons\android\icon-72-hdpi.png" />
@@ -210,7 +189,16 @@
     <Content Include="res\screens\windows\SplashScreen.scale-240.png" />
     <Content Include="res\screens\windows\SplashScreenPhone.scale-240.png" />
     <Content Include="res\screens\wp8\SplashScreenImage.jpg" />
-    <TypeScriptCompile Include="scripts\reader.ts" />
+    <TypeScriptCompile Include="scripts\constant\constant.ts" />
+    <TypeScriptCompile Include="scripts\index.ts" />
+    <TypeScriptCompile Include="scripts\model\AppModel.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelChapter.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelContent.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelImage.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelVolume.ts" />
+    <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
+    <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />
+    <TypeScriptCompile Include="scripts\platformOverrides.ts" />
     <TypeScriptCompile Include="scripts\typings\cordova\cordova.d.ts" />
     <TypeScriptCompile Include="scripts\typings\cordova\plugins\BatteryStatus.d.ts" />
     <TypeScriptCompile Include="scripts\typings\cordova\plugins\Camera.d.ts" />
@@ -240,19 +228,19 @@
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
-    <TypeScriptOutFile>app.js</TypeScriptOutFile>
+    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptOutFile>app.js</TypeScriptOutFile>
+    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Distribution'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptOutFile>app.js</TypeScriptOutFile>
+    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CordovaTools\vs-mda-targets\Microsoft.MDA.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CordovaTools\vs-mda-targets\Microsoft.TypeScript.MDA.targets" />
