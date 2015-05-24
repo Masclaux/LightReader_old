@@ -17,10 +17,10 @@ var LightReader;
                 table.each($.proxy(function (index, value) {
                     var link = $(value).find("a").attr("href");
                     var title = $(value).find("a").attr("title");
-                    //this.ParseVolumes(link, title);
+                    //                    this.ParseVolumes(link, title);
                 }, this));
             }
-            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo");
+            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo"); //
         };
         MenuParser.prototype.ParseVolumes = function (url, title) {
             console.log("Parse Volumes : " + url + " - " + title);
@@ -28,7 +28,6 @@ var LightReader;
             $.get(volumeUrl).done($.proxy(this.OnVolumeParsed, this));
         };
         MenuParser.prototype.OnVolumeParsed = function (res) {
-            var foundH3 = false;
             var foundH2 = false;
             var ready = false;
             var firstPass = false;
@@ -39,11 +38,7 @@ var LightReader;
             summary.each($.proxy(function (index, value) {
                 switch (value.nodeName) {
                     case 'H2':
-                        foundH2 = true;
-                        if (foundH3) {
-                            foundH3 = false;
-                            foundH2 = false;
-                        }
+                        foundH2 = $(value).find("span").first().text().indexOf("by") != -1;
                         break;
                     case 'H3':
                         if (foundH2) {
@@ -56,7 +51,7 @@ var LightReader;
                         if (ready) {
                             if (currentNovelVolume.title != volumeTitle) {
                                 //new volume 
-                                if (firstPass) {
+                                if (firstPass && currentNovelVolume.chapterList.length > 0) {
                                     this.volumes.push(currentNovelVolume);
                                 }
                                 firstPass = true;

@@ -37,13 +37,13 @@ module LightReader
                     var link  = $(value).find("a").attr("href");
                     var title = $(value).find("a").attr("title");
                                    
-                    //this.ParseVolumes(link, title);
+//                    this.ParseVolumes(link, title);
 
                 }, this));
 
             }
 
-            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo");
+            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo");//
         }
 
         private ParseVolumes(url:string, title:string)
@@ -59,7 +59,6 @@ module LightReader
         
         private OnVolumeParsed(res)
         {     
-            var foundH3: boolean = false;
             var foundH2: boolean = false;
             var ready: boolean = false;
 
@@ -70,22 +69,18 @@ module LightReader
 
             var currentNovelVolume: NovelVolume = new NovelVolume();
 
+
+
             var summary = $(res).find("#mw-content-text").find('h2,h3,li,p');//,p,div.thumb.tright,div.thumb');
             summary.each($.proxy(function (index, value)
             {
-                 switch (value.nodeName)
+                switch (value.nodeName)
                 {
                     case 'H2':
-                        foundH2 = true;
-                        if (foundH3)
-                        {
-                            foundH3 = false;
-                            foundH2 = false;
-                        }
+                        foundH2 = $(value).find("span").first().text().indexOf("by") != -1;
                         break;
 
                     case 'H3':
-
                         if (foundH2)
                         {
                             volumeTitle = $(value).find("span").first().text();  
@@ -100,7 +95,7 @@ module LightReader
                             if (currentNovelVolume.title != volumeTitle)
                             {                               
                                 //new volume 
-                                if (firstPass)
+                                if (firstPass && currentNovelVolume.chapterList.length > 0)
                                 {
                                     this.volumes.push(currentNovelVolume);
                                 }
