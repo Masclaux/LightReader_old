@@ -1,6 +1,7 @@
 /// <reference path="model/NovelContent.ts"/>
 /// <reference path="parser/BakaTsuki.ts"/>
 /// <reference path="typings/jquery/jquery.d.ts"/>
+/// <reference path="model/AppModel.ts"/>
 var LightReader;
 (function (LightReader) {
     "use strict";
@@ -16,6 +17,7 @@ var LightReader;
     }
     window.onload = function () {
         console.error("onload");
+        var toto = LightReader.AppModel.Inst();
         initialize();
         // $.get("http://www.baka-tsuki.org/project/index.php?title=Absolute_Duo:Volume_1").done(OnContentOk);        
         var parser = new LightReader.BakaTsukiParser();

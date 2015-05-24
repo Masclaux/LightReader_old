@@ -68,10 +68,8 @@ module LightReader
             var volumeUrl: string = "";
 
             var currentNovelVolume: NovelVolume = new NovelVolume();
-
-
-
-            var summary = $(res).find("#mw-content-text").find('h2,h3,li,p');//,p,div.thumb.tright,div.thumb');
+            
+            var summary = $(res).find("#mw-content-text").find('h2,h3,li,p');
             summary.each($.proxy(function (index, value)
             {
                 switch (value.nodeName)
@@ -122,10 +120,7 @@ module LightReader
                         break;
 
                     case "P":
-                        if (ready)
-                        {
-                            ready = false;
-                        }
+                        ready = !ready;                        
                         break;
                 }
                                

@@ -1,7 +1,8 @@
-﻿/// <reference path="model/NovelContent.ts"/>
+﻿/*/// <reference path="model/NovelContent.ts"/>
 /// <reference path="parser/BakaTsuki.ts"/>
 
 /// <reference path="typings/jquery/jquery.d.ts"/>
+/// <reference path="model/AppModel.ts"/>
 
 module LightReader {
     "use strict";
@@ -11,7 +12,7 @@ module LightReader {
     function initialize() {
 
         document.addEventListener('pause', onPause, false);
-        document.addEventListener('resume', onResume, false);
+        document.addEventListener('resume', onResume, false);        
     }
 
     function onPause() {
@@ -25,7 +26,9 @@ module LightReader {
     window.onload = function ()
     {
 
-        console.error("onload");
+        /*console.error("onload");
+
+        var toto: AppModel = AppModel.Inst();
 
         initialize();
 
@@ -73,3 +76,4 @@ module LightReader {
     }
 }
 
+*/

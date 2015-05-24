@@ -112,8 +112,11 @@
   <ItemGroup>
     <Content Include="css\swiper.css" />
     <Content Include="list.html" />
+    <Content Include="reader.html" />
     <Content Include="scripts\typings\jquery\jquery.js" />
     <Content Include="scripts\typings\swiper\swiper.js" />
+    <Content Include="scripts\view\main.html" />
+    <Content Include="scripts\view\read.html" />
     <Folder Include="images\" />
     <Content Include="css\reader.css" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
@@ -130,6 +133,7 @@
     <Folder Include="res\screens\ios\" />
     <Folder Include="res\screens\windows\" />
     <Folder Include="res\screens\wp8\" />
+    <Folder Include="scripts\viewmodel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml">
@@ -139,7 +143,11 @@
     <TypeScriptCompile Include="scripts\constant\constant.ts" />
     <TypeScriptCompile Include="scripts\index.ts" />
     <TypeScriptCompile Include="scripts\list.ts" />
+    <TypeScriptCompile Include="scripts\model\AppModel.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelChapter.ts" />
     <TypeScriptCompile Include="scripts\model\NovelContent.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelImage.ts" />
+    <TypeScriptCompile Include="scripts\model\NovelVolume.ts" />
     <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
     <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />
     <TypeScriptCompile Include="scripts\platformOverrides.ts" />
@@ -147,7 +155,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="reader.html" />
     <Content Include="res\icons\android\icon-36-ldpi.png" />
     <Content Include="res\icons\android\icon-48-mdpi.png" />
     <Content Include="res\icons\android\icon-72-hdpi.png" />
@@ -233,16 +240,19 @@
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptOutFile>app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptOutFile>app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Distribution'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptOutFile>app.js</TypeScriptOutFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CordovaTools\vs-mda-targets\Microsoft.MDA.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CordovaTools\vs-mda-targets\Microsoft.TypeScript.MDA.targets" />

@@ -1,4 +1,4 @@
-﻿/// <reference path="model/NovelContent.ts"/>
+﻿/*/// <reference path="model/NovelContent.ts"/>
 /// <reference path="parser/MenuParser.ts"/>
 /// <reference path="typings/jquery/jquery.d.ts"/>
 
@@ -30,8 +30,8 @@ module LightReader
     {
         initialize();
         
-        var menuParser: MenuParser = new MenuParser();
-        menuParser.Parse("English");        
+       /* var menuParser: MenuParser = new MenuParser();
+        menuParser.Parse("English");       
     }
 
     function onParsingComplete(parser: BakaTsukiParser)
@@ -40,4 +40,4 @@ module LightReader
     }
 }
 
- 
+ */

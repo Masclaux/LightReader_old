@@ -1,5 +1,6 @@
 /// <reference path="../model/NovelContent.ts"/>
 /// <reference path="../typings/jquery/jquery.d.ts"/>
+/// <reference path="../model/NovelVolume.ts"/>
 var LightReader;
 (function (LightReader) {
     var BakaTsukiParser = (function () {
