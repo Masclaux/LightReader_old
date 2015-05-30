@@ -7,10 +7,12 @@ module LightReader {
 
     export module Application 
     {
-        var model: AppModel;
+        var appModel: AppModel;
 
         export function initialize() 
         {
+            this.appModel = AppModel.Inst();
+
             document.addEventListener('deviceready', onDeviceReady, false);
         }
 
@@ -24,9 +26,7 @@ module LightReader {
 
             var parser: MenuParser = new MenuParser();
             parser.onParsingComplete = onParsingComplete;
-           // parser.Parse("English");
-
-            
+            parser.Parse("English");            
         }
 
         function onPause() {
@@ -44,8 +44,9 @@ module LightReader {
         Application.initialize();
     }
 
-    function onParsingComplete(parser: BakaTsukiParser)
+    function onParsingComplete(parser: MenuParser)
     {
-        console.info("Parsing Complete");
+        console.info("Parsing complet found " + parser.novelList.length);
+        AppModel.Inst().novelList =  parser.novelList;
     }
 }

@@ -8,8 +8,9 @@ var LightReader;
     "use strict";
     var Application;
     (function (Application) {
-        var model;
+        var appModel;
         function initialize() {
+            this.appModel = LightReader.AppModel.Inst();
             document.addEventListener('deviceready', onDeviceReady, false);
         }
         Application.initialize = initialize;
@@ -20,7 +21,7 @@ var LightReader;
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
             var parser = new LightReader.MenuParser();
             parser.onParsingComplete = onParsingComplete;
-            // parser.Parse("English");
+            parser.Parse("English");
         }
         function onPause() {
             // TODO: This application has been suspended. Save application state here.
@@ -33,7 +34,8 @@ var LightReader;
         Application.initialize();
     };
     function onParsingComplete(parser) {
-        console.info("Parsing Complete");
+        console.info("Parsing complet found " + parser.novelList.length);
+        LightReader.AppModel.Inst().novelList = parser.novelList;
     }
 })(LightReader || (LightReader = {}));
 var LightReader;
@@ -41,11 +43,11 @@ var LightReader;
     //Application model Singleton Instance;
     var AppModel = (function () {
         function AppModel() {
+            this.novelList = new Array();
             if (AppModel.inst) {
                 throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
             }
             AppModel.inst = this;
-            //this.model = new NovelContent             
         }
         //return object instance
         AppModel.Inst = function () {

@@ -260,16 +260,16 @@
     <DefaultReferenceGroup>Implicit (Multi-Device Apps)</DefaultReferenceGroup>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnSaveEnabled>true</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
+    <TypeScriptOutFile>/scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Distribution'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>

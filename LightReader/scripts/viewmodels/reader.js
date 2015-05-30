@@ -1,11 +1,23 @@
-﻿define(function (require) {
+﻿define(function (require)
+{
     var app = require('durandal/app'),
-        ko = require('knockout');
+        ko = require('knockout');   
 
-    return {
-        name: ko.observable(),
-        sayHello: function () {
-            app.showMessage('Hello ' + this.name() + '! Nice to meet you.', 'Greetings');
-        }
+    var activate = function (routeData) 
+    {
+        var model      = LightReader.AppModel.Inst();
+        var lightNovel = model.novelList[routeData];
+                    
+        this.id(lightNovel.title);
+    }
+
+
+    return {                
+        id: ko.observable(),
+        activate: activate,
     };
+
+
+
 });
+

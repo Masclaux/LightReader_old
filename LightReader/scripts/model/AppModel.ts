@@ -5,6 +5,8 @@
     {
         private static inst: AppModel = new AppModel();
 
+        public novelList: Array<NovelContent> = new Array<NovelContent>();      
+
         //return object instance
         public static Inst(): AppModel
         {
@@ -19,10 +21,7 @@
             }
 
             AppModel.inst = this;
-
-            //this.model = new NovelContent             
-        }
-
-        public model: NovelContent;       
+         
+        }        
     }
 } 
