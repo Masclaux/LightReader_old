@@ -4,22 +4,27 @@
     <meta charset="utf-8" />
     <title>LightReader</title>
 
+    <link rel="stylesheet" href="scripts/libs/durandal/css/durandal.css" />
+
     <!-- LightReader references -->
     <link href="css/index.css" rel="stylesheet" />
 </head>
 <body>
-    <p>Hello, your application is ready!</p>
 
+    <div id="applicationHost"></div>
+    
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
 
     <!-- External lib  -->
-    <script src="scripts/typings/jquery/jquery.js"></script>
-    <script src="scripts/typings/swiper/swiper.js"></script>
+    <script src="scripts/libs/jquery/jquery.js"></script>
+    <script src="scripts/libs/swiper/swiper.js"></script>
+
+    <script src="scripts/libs/require/require.js" data-main="scripts/appConfig"></script>
 
     <!--Contain all javascript files-->
-    <script src="scripts/app.js"></script>
+    <script src="scripts/app.js"></script>    
 
 </body>
 </html>

@@ -8,6 +8,7 @@ var LightReader;
     "use strict";
     var Application;
     (function (Application) {
+        var model;
         function initialize() {
             document.addEventListener('deviceready', onDeviceReady, false);
         }
@@ -17,9 +18,9 @@ var LightReader;
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-            var parser = new LightReader.BakaTsukiParser();
+            var parser = new LightReader.MenuParser();
             parser.onParsingComplete = onParsingComplete;
-            //parser.Parse("");
+            // parser.Parse("English");
         }
         function onPause() {
             // TODO: This application has been suspended. Save application state here.
@@ -32,6 +33,7 @@ var LightReader;
         Application.initialize();
     };
     function onParsingComplete(parser) {
+        console.info("Parsing Complete");
     }
 })(LightReader || (LightReader = {}));
 var LightReader;
@@ -39,11 +41,11 @@ var LightReader;
     //Application model Singleton Instance;
     var AppModel = (function () {
         function AppModel() {
-            this.test = -1;
             if (AppModel.inst) {
                 throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
             }
             AppModel.inst = this;
+            //this.model = new NovelContent             
         }
         //return object instance
         AppModel.Inst = function () {
@@ -59,6 +61,9 @@ var LightReader;
     var NovelChapter = (function () {
         function NovelChapter() {
             this.images = {};
+            this.url = "";
+            this.title = "";
+            this.pages = new Array();
         }
         return NovelChapter;
     })();
@@ -66,13 +71,15 @@ var LightReader;
 })(LightReader || (LightReader = {}));
 var LightReader;
 (function (LightReader) {
-    var Novel = (function () {
-        function Novel() {
+    var NovelContent = (function () {
+        function NovelContent() {
+            this.url = "";
+            this.title = "";
             this.volumeList = new Array();
         }
-        return Novel;
+        return NovelContent;
     })();
-    LightReader.Novel = Novel;
+    LightReader.NovelContent = NovelContent;
 })(LightReader || (LightReader = {}));
 var LightReader;
 (function (LightReader) {
@@ -100,7 +107,7 @@ var LightReader;
     LightReader.NovelVolume = NovelVolume;
 })(LightReader || (LightReader = {}));
 /// <reference path="../model/NovelContent.ts"/>
-/// <reference path="../typings/jquery/jquery.d.ts"/>
+/// <reference path="../libs/jquery/jquery.d.ts"/>
 /// <reference path="../model/NovelVolume.ts"/>
 var LightReader;
 (function (LightReader) {
@@ -239,13 +246,15 @@ var LightReader;
     })();
     LightReader.BakaTsukiParser = BakaTsukiParser;
 })(LightReader || (LightReader = {}));
-/// <reference path="../typings/jquery/jquery.d.ts"/>
+/// <reference path="../libs/jquery/jquery.d.ts"/>
 var LightReader;
 (function (LightReader) {
     var MenuParser = (function () {
         function MenuParser() {
             this.volumes = new Array();
+            this.novelList = new Array();
         }
+        //Get Light Novel list  
         MenuParser.prototype.Parse = function (lang) {
             var listUrl = MenuParser.LIST_QUERY + lang + ")";
             $.get(listUrl).done($.proxy(this.OnMenuParsed, this));
@@ -256,12 +265,14 @@ var LightReader;
             if (res != null) {
                 var table = $(res).find(".mw-content-ltr ul li");
                 table.each($.proxy(function (index, value) {
-                    var link = $(value).find("a").attr("href");
-                    var title = $(value).find("a").attr("title");
-                    //                    this.ParseVolumes(link, title);
+                    var novel = new LightReader.NovelContent();
+                    novel.title = $(value).find("a").attr("title");
+                    novel.url = $(value).find("a").attr("href");
+                    console.log("Found : " + novel.title + " - " + novel.url);
+                    this.novelList.push(novel);
                 }, this));
             }
-            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo"); //
+            this.onParsingComplete(this);
         };
         MenuParser.prototype.ParseVolumes = function (url, title) {
             console.log("Parse Volumes : " + url + " - " + title);
@@ -316,12 +327,6 @@ var LightReader;
                 }
             }, this));
             this.volumes.push(currentNovelVolume);
-            for (var v in this.volumes) {
-                console.log(this.volumes[v].title);
-                for (var c in this.volumes[v].chapterList) {
-                    console.log(this.volumes[v].chapterList[c].title);
-                }
-            }
         };
         MenuParser.LIST_QUERY = "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(";
         MenuParser.VOLUME_QUERY = "http://baka-tsuki.org";

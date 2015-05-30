@@ -1,0 +1,11 @@
+﻿<section>
+    <h2>List All Light Novel</h2>
+
+    <!-- List all novels -->
+    <ul class="nav" data-bind="foreach: router.navigationModel">
+        <li data-bind="css: { active: isActive }">
+            <a data-bind="attr: { href: hash }, html: title"></a>
+        </li>
+    </ul>
+
+</section>

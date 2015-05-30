@@ -1,10 +1,13 @@
 ﻿module LightReader 
 {     
 
-    export class Novel
+    export class NovelContent
     {
         constructor()
-        {
+        {            
+            this.url   = "";
+            this.title = "";
+
             this.volumeList = new Array<NovelVolume>();
         }
 

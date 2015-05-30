@@ -5,21 +5,26 @@
 module LightReader {
     "use strict";
 
-    export module Application {
-        export function initialize() {
+    export module Application 
+    {
+        var model: AppModel;
+
+        export function initialize() 
+        {
             document.addEventListener('deviceready', onDeviceReady, false);
         }
 
-        function onDeviceReady() {
+        function onDeviceReady() 
+        {
             // Handle the Cordova pause and resume events
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
 
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
 
-            var parser: BakaTsukiParser = new BakaTsukiParser();
+            var parser: MenuParser = new MenuParser();
             parser.onParsingComplete = onParsingComplete;
-            //parser.Parse("");
+           // parser.Parse("English");
 
             
         }
@@ -34,12 +39,13 @@ module LightReader {
 
     }
 
-    window.onload = function () {
+    window.onload = function () 
+    {
         Application.initialize();
     }
 
     function onParsingComplete(parser: BakaTsukiParser)
     {
-
+        console.info("Parsing Complete");
     }
 }

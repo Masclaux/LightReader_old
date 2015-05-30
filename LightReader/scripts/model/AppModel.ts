@@ -17,9 +17,12 @@
             {
                 throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
             }
+
             AppModel.inst = this;
+
+            //this.model = new NovelContent             
         }
 
-        public test: Number = -1;        
+        public model: NovelContent;       
     }
 } 

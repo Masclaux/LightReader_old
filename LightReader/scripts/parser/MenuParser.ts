@@ -1,4 +1,4 @@
-﻿/// <reference path="../typings/jquery/jquery.d.ts"/>
+﻿/// <reference path="../libs/jquery/jquery.d.ts"/>
 
 module LightReader
 {
@@ -14,7 +14,9 @@ module LightReader
 
         public volumes: Array<NovelVolume> = new Array<NovelVolume>();   
 
+        public novelList: Array<NovelContent> = new Array<NovelContent>();  
 
+        //Get Light Novel list  
         public Parse(lang: string)
         {
             var listUrl = MenuParser.LIST_QUERY + lang + ")";
@@ -34,16 +36,18 @@ module LightReader
                 var table = $(res).find(".mw-content-ltr ul li");
                 table.each( $.proxy(function (index, value)
                 {    
-                    var link  = $(value).find("a").attr("href");
-                    var title = $(value).find("a").attr("title");
-                                   
-//                    this.ParseVolumes(link, title);
+                    var novel = new NovelContent();
+                    novel.title = $(value).find("a").attr("title");                                 
+                    novel.url = $(value).find("a").attr("href");
+
+                    console.log("Found : " + novel.title + " - " + novel.url);
+
+                    this.novelList.push(novel);
 
                 }, this));
-
             }
 
-            this.ParseVolumes("/project/index.php?title=Absolute_Duo", "ZERo");//
+            this.onParsingComplete(this);
         }
 
         private ParseVolumes(url:string, title:string)
@@ -126,18 +130,7 @@ module LightReader
                                
             }, this));
 
-            this.volumes.push(currentNovelVolume);
-
-            for (var v in this.volumes)
-            {
-                console.log(this.volumes[v].title);
-
-                for (var c in this.volumes[v].chapterList)
-                {
-                    console.log(this.volumes[v].chapterList[c].title);
-                }
-            }
-            
+            this.volumes.push(currentNovelVolume);                                  
         }
     }
 } 
