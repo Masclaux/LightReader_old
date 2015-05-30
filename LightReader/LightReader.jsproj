@@ -138,10 +138,12 @@
     <Content Include="scripts\libs\require\require.js" />
     <Content Include="scripts\libs\require\text.js" />
     <Content Include="scripts\libs\swiper\swiper.js" />
+    <Content Include="scripts\viewmodels\detail.js" />
     <Content Include="scripts\viewmodels\home.js" />
     <Content Include="scripts\viewmodels\list.js" />
     <Content Include="scripts\viewmodels\main.js" />
     <Content Include="scripts\viewmodels\reader.js" />
+    <Content Include="scripts\views\detail.html" />
     <Content Include="scripts\views\home.html" />
     <Content Include="scripts\views\list.html" />
     <Content Include="scripts\views\main.html" />
