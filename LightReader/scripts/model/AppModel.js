@@ -1,6 +1,6 @@
 var LightReader;
 (function (LightReader) {
-    //Application model Singleton Instance;
+    //Application model Singleton Instance
     var AppModel = (function () {
         function AppModel() {
             this.novelList = new Array();

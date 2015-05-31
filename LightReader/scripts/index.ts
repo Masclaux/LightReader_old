@@ -44,6 +44,7 @@ module LightReader {
         Application.initialize();
     }
 
+    //debug stuff
     function onLightNovelListComplete(parser: MenuParser)
     {
         console.info("Parsing complet found " + parser.novelList.length);
@@ -56,7 +57,17 @@ module LightReader {
 
     function onLightNovelDetailComplete(parser: DetailParser)
     {
-        console.info("Parsing complet found " + parser.novel.volumeList.length);
+        console.info("Parsing detail complete  found " + parser.novel.volumeList.length);
         AppModel.Inst().novelList[0] = parser.novel;
+
+        var pa: BakaTsukiParser = new BakaTsukiParser();
+        pa.onParsingComplete = onParsingComplete;
+        pa.Parse(AppModel.Inst().novelList[0].volumeList[1]);
+    }
+    
+    function onParsingComplete(parser: BakaTsukiParser)
+    {
+        AppModel.Inst().novelList[0].volumeList[1] = parser.model;        
+        AppModel.Inst().novelList[0].volumeList[1].GetPages();
     }
 }

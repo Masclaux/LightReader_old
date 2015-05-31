@@ -1,8 +1,12 @@
 ﻿<section>
-    <h2>Reader</h2> 
-
-    <!-- List all novels -->
-    <span data-bind="text: id"></span>
-
+    
+     <div class="swiper-container">
+        <div class="swiper-wrapper" data-bind="foreach: pages">
+            <div class="swiper-slide">
+                <span data-bind="html: $data"/>             
+                <div id="footer" data-bind="text: $index" />
+            </div>            
+        </div>
+    </div>    
 
 </section>

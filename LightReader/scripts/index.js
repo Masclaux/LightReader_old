@@ -29,6 +29,7 @@ var LightReader;
     window.onload = function () {
         Application.initialize();
     };
+    //debug stuff
     function onLightNovelListComplete(parser) {
         console.info("Parsing complet found " + parser.novelList.length);
         LightReader.AppModel.Inst().novelList = parser.novelList;
@@ -37,8 +38,15 @@ var LightReader;
         pa.Parse(LightReader.AppModel.Inst().novelList[0]);
     }
     function onLightNovelDetailComplete(parser) {
-        console.info("Parsing complet found " + parser.novel.volumeList.length);
+        console.info("Parsing detail complete  found " + parser.novel.volumeList.length);
         LightReader.AppModel.Inst().novelList[0] = parser.novel;
+        var pa = new LightReader.BakaTsukiParser();
+        pa.onParsingComplete = onParsingComplete;
+        pa.Parse(LightReader.AppModel.Inst().novelList[0].volumeList[1]);
+    }
+    function onParsingComplete(parser) {
+        LightReader.AppModel.Inst().novelList[0].volumeList[1] = parser.model;
+        LightReader.AppModel.Inst().novelList[0].volumeList[1].GetPages();
     }
 })(LightReader || (LightReader = {}));
 //# sourceMappingURL=index.js.map

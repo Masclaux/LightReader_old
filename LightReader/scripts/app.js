@@ -50,6 +50,7 @@ var LightReader;
     window.onload = function () {
         Application.initialize();
     };
+    //debug stuff
     function onLightNovelListComplete(parser) {
         console.info("Parsing complet found " + parser.novelList.length);
         LightReader.AppModel.Inst().novelList = parser.novelList;
@@ -58,8 +59,14 @@ var LightReader;
         pa.Parse(LightReader.AppModel.Inst().novelList[0]);
     }
     function onLightNovelDetailComplete(parser) {
-        console.info("Parsing complet found " + parser.novel.volumeList.length);
+        console.info("Parsing detail complete  found " + parser.novel.volumeList.length);
         LightReader.AppModel.Inst().novelList[0] = parser.novel;
+        var pa = new LightReader.BakaTsukiParser();
+        pa.onParsingComplete = onParsingComplete;
+        pa.Parse(LightReader.AppModel.Inst().novelList[0].volumeList[1]);
+    }
+    function onParsingComplete(parser) {
+        console.info("finish");
     }
 })(LightReader || (LightReader = {}));
 var LightReader;
@@ -122,41 +129,13 @@ var LightReader;
             this.nbImageDown = 0;
             this.nbImageFound = 0;
         }
-        BakaTsukiParser.prototype.Parse = function (content) {
-            console.info("Start parsing light novel volume");
-            var res = $.parseHTML(content);
-            if (res != null) {
-                console.info("Parsing summary");
-                var summary = $(res).find(".toc ul li.toclevel-1");
-                summary.each(function (index, value) {
-                    var link = $(value).find("a").attr("href");
-                    var title = $(value).find(".toctext").first().text();
-                    //console.log("found : " + title + " - " + link);
-                });
-            }
-            this.model = new LightReader.NovelVolume();
-            //Volume_1_Illustrations
-            //Volume_1_Prologue
-            //Volume_1_Chapter_1
-            //Volume_1_Chapter_2
-            //Volume_1_Chapter_3
-            //Volume_1_Chapter_4
-            //Volume_1_Chapter_5
-            //Volume_1_Chapter_6
-            //Volume_1_Chapter_7
-            //Volume_1_Epilogue
-            this.model.title = "Absolute_Duo";
-            this.model.chapterList = new Array();
-            var chapter = new LightReader.NovelChapter();
-            chapter.title = "Volume_1_Chapter_1";
-            this.model.chapterList.push(chapter);
+        BakaTsukiParser.prototype.Parse = function (volume) {
+            this.model = volume;
+            console.info("Start parsing volume : " + volume.title);
             for (var c in this.model.chapterList) {
                 var chapter = this.model.chapterList[c];
-                $.get("http://www.baka-tsuki.org/project/index.php?title=" + this.model.title + ":" + chapter.title).done($.proxy(this.OnContentOk, this));
+                $.get("http://www.baka-tsuki.org/project/index.php?title=" + this.model.url).done($.proxy(this.GetChapter, this));
             }
-        };
-        BakaTsukiParser.prototype.OnContentOk = function (data) {
-            this.GetChapter(data);
         };
         BakaTsukiParser.prototype.GetChapter = function (content) {
             console.info("Parsing Chapter");

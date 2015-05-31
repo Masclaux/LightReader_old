@@ -4,6 +4,23 @@ var LightReader;
         function NovelVolume() {
             this.chapterList = new Array();
         }
+        NovelVolume.prototype.GetPages = function () {
+            var res = new Array();
+            for (var c in this.chapterList) {
+                for (var p in this.chapterList[c].pages) {
+                    var page = this.chapterList[c].pages[p];
+                    //image found 
+                    var currentImage = page.search("img;;");
+                    if (currentImage != -1) {
+                        //get id 
+                        var id = page.split(";;")[1];
+                        page = "<img src='" + this.chapterList[c].images[id].url + "'style='width:100%'/>";
+                    }
+                    res.push(page);
+                }
+            }
+            return res;
+        };
         return NovelVolume;
     })();
     LightReader.NovelVolume = NovelVolume;

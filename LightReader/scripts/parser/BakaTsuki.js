@@ -8,49 +8,27 @@ var LightReader;
             this.nbImageDown = 0;
             this.nbImageFound = 0;
         }
-        BakaTsukiParser.prototype.Parse = function (content) {
-            console.info("Start parsing light novel volume");
-            var res = $.parseHTML(content);
-            if (res != null) {
-                console.info("Parsing summary");
-                var summary = $(res).find(".toc ul li.toclevel-1");
-                summary.each(function (index, value) {
-                    var link = $(value).find("a").attr("href");
-                    var title = $(value).find(".toctext").first().text();
-                    //console.log("found : " + title + " - " + link);
-                });
-            }
-            this.model = new LightReader.NovelVolume();
-            //Volume_1_Illustrations
-            //Volume_1_Prologue
-            //Volume_1_Chapter_1
-            //Volume_1_Chapter_2
-            //Volume_1_Chapter_3
-            //Volume_1_Chapter_4
-            //Volume_1_Chapter_5
-            //Volume_1_Chapter_6
-            //Volume_1_Chapter_7
-            //Volume_1_Epilogue
-            this.model.title = "Absolute_Duo";
-            this.model.chapterList = new Array();
-            var chapter = new LightReader.NovelChapter();
-            chapter.title = "Volume_1_Chapter_1";
-            this.model.chapterList.push(chapter);
+        BakaTsukiParser.prototype.Parse = function (volume) {
+            this.model = volume;
+            console.info("Start parsing volume : " + volume.title);
             for (var c in this.model.chapterList) {
-                var chapter = this.model.chapterList[c];
-                $.get("http://www.baka-tsuki.org/project/index.php?title=" + this.model.title + ":" + chapter.title).done($.proxy(this.OnContentOk, this));
+                this.retrieveChapter(c);
             }
         };
-        BakaTsukiParser.prototype.OnContentOk = function (data) {
-            this.GetChapter(data);
+        BakaTsukiParser.prototype.retrieveChapter = function (i) {
+            var chapter = this.model.chapterList[i];
+            $.ajax({
+                url: "http://www.baka-tsuki.org" + chapter.url,
+                success: $.proxy(function (result) { this.GetChapter(result, i); }, this)
+            });
         };
-        BakaTsukiParser.prototype.GetChapter = function (content) {
+        BakaTsukiParser.prototype.GetChapter = function (content, chapter) {
             console.info("Parsing Chapter");
             var firstPartNotFound = false;
             var tempParaText = "";
             var tempWords = 0;
             this.nbImageFound = 0;
-            this.model.chapterList[0].pages = new Array();
+            this.model.chapterList[chapter].pages = new Array();
             var res = $.parseHTML(content);
             if (res != null) {
                 console.info("Parsing summary");
@@ -61,8 +39,8 @@ var LightReader;
                             tempParaText += "<h2>" + value.firstChild.textContent + "</h2>";
                             break;
                         case 'H3':
-                            if (this.model.chapterList[0].pages.length > 0) {
-                                this.model.chapterList[0].pages.push(tempParaText);
+                            if (this.model.chapterList[chapter].pages.length > 0) {
+                                this.model.chapterList[chapter].pages.push(tempParaText);
                                 tempWords = 0;
                                 tempParaText = "";
                             }
@@ -74,35 +52,38 @@ var LightReader;
                         case 'DIV':
                             this.nbImageFound++;
                             var val = this.parseImage(value);
-                            this.model.chapterList[0].pages.push("img;;" + val);
-                            this.model.chapterList[0].images[val] = new LightReader.NovelImage();
-                            this.model.chapterList[0].images[val].id = val;
+                            this.model.chapterList[chapter].pages.push("img;;" + val);
+                            this.model.chapterList[chapter].images[val] = new LightReader.NovelImage();
+                            this.model.chapterList[chapter].images[val].id = val;
                             break;
                     }
                     tempWords += value.firstChild.textContent.split(" ").length;
                     if (tempWords >= 350) {
-                        this.model.chapterList[0].pages.push(tempParaText);
+                        this.model.chapterList[chapter].pages.push(tempParaText);
                         tempWords = 0;
                         tempParaText = "";
                     }
                 }, this));
                 if (tempParaText != "") {
-                    this.model.chapterList[0].pages.push(tempParaText);
+                    this.model.chapterList[chapter].pages.push(tempParaText);
                 }
             }
-            for (var pictureName in this.model.chapterList[0].images) {
-                $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done($.proxy(function (results) {
-                    this.onGetImage(results);
-                }, this));
+            //get all image from chapter 
+            for (var pictureName in this.model.chapterList[chapter].images) {
+                this.retrieveImage(pictureName, chapter);
             }
         };
-        BakaTsukiParser.prototype.onGetImage = function (results) {
+        BakaTsukiParser.prototype.retrieveImage = function (pictureName, chapterIndex) {
+            $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done //avoid warning with & at the end ><
+            ($.proxy(function (results) { this.onGetImage(results, chapterIndex); }, this));
+        };
+        BakaTsukiParser.prototype.onGetImage = function (results, chapterIndex) {
             this.nbImageDown++;
             console.info("Try to parse : " + results);
             for (var index in results.query.pages) {
                 var id = results.query.pages[index].imageinfo[0].descriptionurl.split("File:")[1];
                 var url = results.query.pages[index].imageinfo[0].url;
-                this.model.chapterList[0].images[id].url = url;
+                this.model.chapterList[chapterIndex].images[id].url = url;
             }
             if (this.nbImageDown == this.nbImageFound) {
                 this.onParsingComplete(this);
@@ -123,7 +104,7 @@ var LightReader;
                                     if (finalUrl.length > 0) {
                                         fileUrl = finalUrl[1]; //right part
                                     }
-                                    break;
+                                    break; // yes so we quit the loop
                                 }
                             }
                         }

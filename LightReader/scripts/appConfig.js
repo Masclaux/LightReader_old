@@ -6,6 +6,7 @@
         'transitions': 'libs/durandal/js/transitions',
         'knockout': 'libs/knockout/knockout-3.1.0',
         'jquery': 'libs/jquery/jquery',
+        'swiper': 'libs/swiper/swiper',
         'model': 'model',
         'constant': 'constant',
         'parser': 'parser',
