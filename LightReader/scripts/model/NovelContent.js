@@ -1,11 +1,13 @@
 var LightReader;
 (function (LightReader) {
-    var Novel = (function () {
-        function Novel() {
+    var NovelContent = (function () {
+        function NovelContent() {
+            this.url = "";
+            this.title = "";
             this.volumeList = new Array();
         }
-        return Novel;
+        return NovelContent;
     })();
-    LightReader.Novel = Novel;
+    LightReader.NovelContent = NovelContent;
 })(LightReader || (LightReader = {}));
 //# sourceMappingURL=NovelContent.js.map

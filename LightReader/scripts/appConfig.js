@@ -5,7 +5,10 @@
         'plugins': 'libs/durandal/js/plugins',
         'transitions': 'libs/durandal/js/transitions',
         'knockout': 'libs/knockout/knockout-3.1.0',
-        'jquery': 'libs/jquery/jquery'
+        'jquery': 'libs/jquery/jquery',
+        'model': 'model',
+        'constant': 'constant',
+        'parser': 'parser',
     }
 });
 

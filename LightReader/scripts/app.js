@@ -1,8 +1,25 @@
 // FULL_URL = "http://www.baka-tsuki.org/project/index.php?title=";  
-// For an introduction to the Blank template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkID=397705
-// To debug code on page load in Ripple or on Android devices/emulators: launch your app, set breakpoints, 
-// and then run "window.location.reload()" in the JavaScript Console.
+var LightReader;
+(function (LightReader) {
+    //Application model Singleton Instance
+    var AppModel = (function () {
+        function AppModel() {
+            this.novelList = new Array();
+            if (AppModel.inst) {
+                throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
+            }
+            AppModel.inst = this;
+        }
+        //return object instance
+        AppModel.Inst = function () {
+            return AppModel.inst;
+        };
+        AppModel.inst = new AppModel();
+        return AppModel;
+    })();
+    LightReader.AppModel = AppModel;
+})(LightReader || (LightReader = {}));
+///<reference path="model/AppModel.ts"/>
 var LightReader;
 (function (LightReader) {
     "use strict";
@@ -20,7 +37,7 @@ var LightReader;
             document.addEventListener('resume', onResume, false);
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
             var parser = new LightReader.MenuParser();
-            parser.onParsingComplete = onParsingComplete;
+            parser.onLightNovelListComplete = onLightNovelListComplete;
             parser.Parse("English");
         }
         function onPause() {
@@ -33,30 +50,17 @@ var LightReader;
     window.onload = function () {
         Application.initialize();
     };
-    function onParsingComplete(parser) {
+    function onLightNovelListComplete(parser) {
         console.info("Parsing complet found " + parser.novelList.length);
         LightReader.AppModel.Inst().novelList = parser.novelList;
+        var pa = new LightReader.DetailParser();
+        pa.onLightNovelDetailComplete = onLightNovelDetailComplete;
+        pa.Parse(LightReader.AppModel.Inst().novelList[0]);
     }
-})(LightReader || (LightReader = {}));
-var LightReader;
-(function (LightReader) {
-    //Application model Singleton Instance;
-    var AppModel = (function () {
-        function AppModel() {
-            this.novelList = new Array();
-            if (AppModel.inst) {
-                throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
-            }
-            AppModel.inst = this;
-        }
-        //return object instance
-        AppModel.Inst = function () {
-            return AppModel.inst;
-        };
-        AppModel.inst = new AppModel();
-        return AppModel;
-    })();
-    LightReader.AppModel = AppModel;
+    function onLightNovelDetailComplete(parser) {
+        console.info("Parsing complet found " + parser.novel.volumeList.length);
+        LightReader.AppModel.Inst().novelList[0] = parser.novel;
+    }
 })(LightReader || (LightReader = {}));
 var LightReader;
 (function (LightReader) {
@@ -200,10 +204,10 @@ var LightReader;
                     this.model.chapterList[0].pages.push(tempParaText);
                 }
             }
+            //get all image from chapter 
             for (var pictureName in this.model.chapterList[0].images) {
-                $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done($.proxy(function (results) {
-                    this.onGetImage(results);
-                }, this));
+                $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done //avoid warning with & at the end ><
+                ($.proxy(function (results) { this.onGetImage(results); }, this));
             }
         };
         BakaTsukiParser.prototype.onGetImage = function (results) {
@@ -233,7 +237,7 @@ var LightReader;
                                     if (finalUrl.length > 0) {
                                         fileUrl = finalUrl[1]; //right part
                                     }
-                                    break;
+                                    break; // yes so we quit the loop
                                 }
                             }
                         }
@@ -251,37 +255,23 @@ var LightReader;
 /// <reference path="../libs/jquery/jquery.d.ts"/>
 var LightReader;
 (function (LightReader) {
-    var MenuParser = (function () {
-        function MenuParser() {
+    var DetailParser = (function () {
+        function DetailParser() {
             this.volumes = new Array();
-            this.novelList = new Array();
         }
         //Get Light Novel list  
-        MenuParser.prototype.Parse = function (lang) {
-            var listUrl = MenuParser.LIST_QUERY + lang + ")";
-            $.get(listUrl).done($.proxy(this.OnMenuParsed, this));
+        DetailParser.prototype.Parse = function (novel) {
+            console.info("Stating Parsing detail for " + novel.title);
+            this.novel = novel;
+            this.ParseVolumes(novel.url, novel.title);
         };
-        MenuParser.prototype.OnMenuParsed = function (data) {
-            console.info("Start parsing light novel list");
-            var res = $.parseHTML(data);
-            if (res != null) {
-                var table = $(res).find(".mw-content-ltr ul li");
-                table.each($.proxy(function (index, value) {
-                    var novel = new LightReader.NovelContent();
-                    novel.title = $(value).find("a").attr("title");
-                    novel.url = $(value).find("a").attr("href");
-                    console.log("Found : " + novel.title + " - " + novel.url);
-                    this.novelList.push(novel);
-                }, this));
-            }
-            this.onParsingComplete(this);
-        };
-        MenuParser.prototype.ParseVolumes = function (url, title) {
+        DetailParser.prototype.ParseVolumes = function (url, title) {
             console.log("Parse Volumes : " + url + " - " + title);
-            var volumeUrl = MenuParser.VOLUME_QUERY + url;
+            var volumeUrl = DetailParser.VOLUME_QUERY + url;
             $.get(volumeUrl).done($.proxy(this.OnVolumeParsed, this));
         };
-        MenuParser.prototype.OnVolumeParsed = function (res) {
+        DetailParser.prototype.OnVolumeParsed = function (res) {
+            console.info("Start parse html");
             var foundH2 = false;
             var ready = false;
             var firstPass = false;
@@ -328,10 +318,42 @@ var LightReader;
                         break;
                 }
             }, this));
-            this.volumes.push(currentNovelVolume);
+            this.novel.volumeList = this.volumes;
+            this.onLightNovelDetailComplete(this);
+        };
+        DetailParser.VOLUME_QUERY = "http://baka-tsuki.org";
+        return DetailParser;
+    })();
+    LightReader.DetailParser = DetailParser;
+})(LightReader || (LightReader = {}));
+/// <reference path="../libs/jquery/jquery.d.ts"/>
+var LightReader;
+(function (LightReader) {
+    var MenuParser = (function () {
+        function MenuParser() {
+            this.novelList = new Array();
+        }
+        //Get Light Novel list  
+        MenuParser.prototype.Parse = function (lang) {
+            var listUrl = MenuParser.LIST_QUERY + lang + ")";
+            $.get(listUrl).done($.proxy(this.OnMenuParsed, this));
+        };
+        MenuParser.prototype.OnMenuParsed = function (data) {
+            console.info("Start parsing light novel list");
+            var res = $.parseHTML(data);
+            if (res != null) {
+                var table = $(res).find(".mw-content-ltr ul li");
+                table.each($.proxy(function (index, value) {
+                    var novel = new LightReader.NovelContent();
+                    novel.title = $(value).find("a").attr("title");
+                    novel.url = $(value).find("a").attr("href");
+                    console.log("Found : " + novel.title + " - " + novel.url);
+                    this.novelList.push(novel);
+                }, this));
+            }
+            this.onLightNovelListComplete(this);
         };
         MenuParser.LIST_QUERY = "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(";
-        MenuParser.VOLUME_QUERY = "http://baka-tsuki.org";
         return MenuParser;
     })();
     LightReader.MenuParser = MenuParser;

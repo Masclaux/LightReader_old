@@ -102,6 +102,30 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>95bb5cb9-92d2-4219-8bcd-b3867369063e</ProjectGuid>
   </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-AnyCPU'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|iOS'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-x64'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-x86'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-ARM'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows Phone 8'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows Phone (Universal)'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0'">
     <VisualStudioVersion>12.0</VisualStudioVersion>
@@ -254,24 +278,25 @@
     <TypeScriptCompile Include="scripts\model\NovelImage.ts" />
     <TypeScriptCompile Include="scripts\model\NovelVolume.ts" />
     <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
+    <TypeScriptCompile Include="scripts\parser\DetailParser.ts" />
     <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />
     <TypeScriptCompile Include="scripts\platformOverrides.ts" />
   </ItemGroup>
   <PropertyGroup>
-    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
     <DefaultReferenceGroup>Implicit (Multi-Device Apps)</DefaultReferenceGroup>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptCompileOnSaveEnabled>true</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptOutFile>/scripts/app.js</TypeScriptOutFile>
+    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Distribution'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>

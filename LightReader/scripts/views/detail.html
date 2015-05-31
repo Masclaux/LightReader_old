@@ -4,5 +4,11 @@
     <!-- List all novels -->
     <span data-bind="text: id"></span>
 
+    <!-- List all novels -->
+    <ul data-bind="foreach: list">
+        <li>
+            <a data-bind="attr:{href: '#reader/' + $index() }, text: $data.title" />
+        </li>
+    </ul>   
 
 </section>

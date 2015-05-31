@@ -3,7 +3,7 @@ var LightReader;
     //Application model Singleton Instance;
     var AppModel = (function () {
         function AppModel() {
-            this.test = -1;
+            this.novelList = new Array();
             if (AppModel.inst) {
                 throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
             }

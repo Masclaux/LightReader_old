@@ -1,6 +1,6 @@
 ﻿module LightReader 
 {
-    //Application model Singleton Instance;
+    //Application model Singleton Instance
     export class AppModel
     {
         private static inst: AppModel = new AppModel();

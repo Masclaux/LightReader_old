@@ -3,6 +3,9 @@ var LightReader;
     var NovelChapter = (function () {
         function NovelChapter() {
             this.images = {};
+            this.url = "";
+            this.title = "";
+            this.pages = new Array();
         }
         return NovelChapter;
     })();

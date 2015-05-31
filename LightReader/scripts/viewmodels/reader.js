@@ -3,10 +3,10 @@
     var app = require('durandal/app'),
         ko = require('knockout');   
 
-    var activate = function (routeData) 
+    var activate = function (index) 
     {
         var model      = LightReader.AppModel.Inst();
-        var lightNovel = model.novelList[routeData];
+        var lightNovel = model.novelList[index];
                     
         this.id(lightNovel.title);
     }
