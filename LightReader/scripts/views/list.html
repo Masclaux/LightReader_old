@@ -2,12 +2,11 @@
 
     <h2>List All Light Novel</h2>
 
-    <!-- List all novels -->
-     <ul data-bind="foreach: list">
-        <li>
-            <a data-bind="attr:{href: '#detail/' + $index() }, text: $data.title" />
+    <ul class='list' data-bind="foreach: list">
+        <li class='nav'>
+             <a data-bind="attr:{href: '#detail/' + $index() }, text: $data.title" />                    
         </li>
-    </ul>   
+    </ul>
 
 </section>
 

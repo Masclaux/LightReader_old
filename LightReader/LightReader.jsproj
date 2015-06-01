@@ -134,6 +134,13 @@
     <Content Include="css\reader.css" />
     <Content Include="css\swiper.css" />
     <Content Include="scripts\appConfig.js" />
+    <Content Include="scripts\libs\chocolate\chui-3.8.6.js" />
+    <Content Include="scripts\libs\chocolate\chui-android-3.8.6.css" />
+    <Content Include="scripts\libs\chocolate\chui-android-3.8.6.min.css" />
+    <Content Include="scripts\libs\chocolate\chui-ios-3.8.6.css" />
+    <Content Include="scripts\libs\chocolate\chui-ios-3.8.6.min.css" />
+    <Content Include="scripts\libs\chocolate\chui-win-3.8.6.css" />
+    <Content Include="scripts\libs\chocolate\chui-win-3.8.6.min.css" />
     <Content Include="scripts\libs\durandal\css\durandal.css" />
     <Content Include="scripts\libs\durandal\img\icon.png" />
     <Content Include="scripts\libs\durandal\img\ios-startup-image-landscape.png" />
@@ -193,7 +200,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="index.html" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="res\icons\android\icon-36-ldpi.png" />
     <Content Include="res\icons\android\icon-48-mdpi.png" />
     <Content Include="res\icons\android\icon-72-hdpi.png" />
@@ -282,7 +291,7 @@
     <TypeScriptCompile Include="scripts\platformOverrides.ts" />
   </ItemGroup>
   <PropertyGroup>
-    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
     <DefaultReferenceGroup>Implicit (Multi-Device Apps)</DefaultReferenceGroup>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
