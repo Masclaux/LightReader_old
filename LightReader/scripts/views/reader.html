@@ -1,12 +1,12 @@
-﻿<section>
-    
-     <div class="swiper-container">
-        <div class="swiper-wrapper" data-bind="foreach: pages">
-            <div class="swiper-slide">
-                <span data-bind="html: $data"/>             
-                <div id="footer" data-bind="text: $index" />
-            </div>            
+﻿<article id='reader'>
+    <section>
+        <div class="swiper-container">
+            <div class="swiper-wrapper" data-bind="foreach: pages">
+                <div class="swiper-slide">
+                    <span data-bind="html: $data" />
+                    <div id="footer" data-bind="text: $index" />
+                </div>
+            </div>
         </div>
-    </div>    
-
-</section>
+    </section>
+</article>

@@ -1,12 +1,15 @@
-﻿<section>
+﻿<article id='list'>
 
-    <h2>List All Light Novel</h2>
+    <section>
 
-    <ul class='list' data-bind="foreach: list">
-        <li class='nav'>
-             <a data-bind="attr:{href: '#detail/' + $index() }, text: $data.title" />                    
-        </li>
-    </ul>
+        <h2>List All Light Novel</h2>
 
-</section>
+        <ul class='list' data-bind="foreach: list">
+            <li class='comp'>
+                <a data-bind="attr:{href: '#detail/' + $index() }, text: $data.title" />
+            </li>
+        </ul>
 
+    </section>
+
+</article>
