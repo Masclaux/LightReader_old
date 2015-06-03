@@ -29,14 +29,14 @@
 
                     //image found 
                     var currentImage: number = page.search("img;;");
-                    if (currentImage != -1)
-                    {
+                    if (currentImage != -1) {
                         //get id 
                         var id: string = page.split(";;")[1];
                         page = "<img src='" + this.chapterList[c].images[id].url + "'style='width:100%'/>";
-                    }         
-                               
-                    res.push(page);
+                    }
+                    else {
+                        res.push(page);
+                    }
                 }                            
             }
             return res;

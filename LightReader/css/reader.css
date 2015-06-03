@@ -1,11 +1,35 @@
-﻿body {
-    background: #eee;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.swiper-slide {
+﻿.swiper-slide
+ {
    height: 100%;
    overflow: auto;
+   color: #333333;
+   background-color :#ffffff;
+}
+
+.swiper-slide h1
+{
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight : bold;
+    color: #333333; 
+}
+.swiper-slide h2
+{
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight : bold;
+    color: #333333;
+}
+
+.swiper-slide h3
+{
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight : bold;
+    color: #333333;
+}
+
+.swiper-slide p
+{
+    color: #333333;
+    font-family: Georgia, "Times New Roman", serif;
 }
 
 #footer {

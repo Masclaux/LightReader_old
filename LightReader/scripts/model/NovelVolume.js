@@ -16,7 +16,9 @@ var LightReader;
                         var id = page.split(";;")[1];
                         page = "<img src='" + this.chapterList[c].images[id].url + "'style='width:100%'/>";
                     }
-                    res.push(page);
+                    else {
+                        res.push(page);
+                    }
                 }
             }
             return res;

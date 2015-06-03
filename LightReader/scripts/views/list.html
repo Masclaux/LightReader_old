@@ -1,15 +1,21 @@
-﻿<article id='list'>
+﻿<!--
+    <a href="#reader/1">Debug Novels</a>
+    
+    click: onClick
+    -->
+<article id='list'>
 
     <section>
-
-        <h2>List All Light Novel</h2>
-
         <ul class='list' data-bind="foreach: list">
             <li class='comp'>
-                <a data-bind="attr:{href: '#detail/' + $index() }, text: $data.title" />
+                <div>
+                    <p data-bind="text: $data.title" />
+                </div>
+                <aside>
+                    <span class='nav'></span>
+                </aside>
             </li>
         </ul>
-
     </section>
 
 </article>
