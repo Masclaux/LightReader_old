@@ -2,9 +2,12 @@
 {
     var app = require('durandal/app'),
         ko = require('knockout'),
-        swiper = require('swiper');
+        swiper = require('swiper'),
+        jquery = require('jquery'),
+        chocolate = require('chocolate');
 
-    function activate(index)
+
+    function activate(volume, index)
     {
         var model      = LightReader.AppModel.Inst();
         var lightNovel = model.novelList[0].volumeList[1];
@@ -13,7 +16,9 @@
     }
 
     function attached(view)
-    {    
+    {
+        $.UIHideNavBar();
+
         var swiper = new Swiper('.swiper-container',
            {
                preloadImages: true,
@@ -33,6 +38,13 @@
             p.container.css({ height: window.innerHeight + 'px' });
         });
 
+        $('body').on('longtap', function () {
+            $.UIShowNavBar();
+        });
+
+        $('swiper-container').on('singletap', function () {
+            $.UIHideNavBar();
+        });
     }
 
     return {
