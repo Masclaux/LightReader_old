@@ -9,7 +9,12 @@
     var datas = LightReader.AppModel.Inst();
     return {
         list: datas.novelList,
-        onClick: function () { console.info("eeee"); }
-        };
+        onNovelSelected: function (that, site)
+        {           
+            var context = ko.contextFor(event.target);
+            router.navigate( 'detail/'+context.$index() );
+        }
+    };
+    
 });
 

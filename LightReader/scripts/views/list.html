@@ -1,13 +1,11 @@
 ﻿<!--
     <a href="#reader/1">Debug Novels</a>
-    
-    click: onClick
+
     -->
 <article id='list'>
-
     <section>
-        <ul class='list' data-bind="foreach: list">
-            <li class='comp'>
+        <ul class='list' data-bind="foreach: list"><!--, click: onClick-->
+            <li class='comp' data-goto data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
                 <div>
                     <p data-bind="text: $data.title" />
                 </div>
@@ -17,5 +15,4 @@
             </li>
         </ul>
     </section>
-
 </article>
