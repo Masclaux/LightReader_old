@@ -15,36 +15,44 @@
         this.pages(lightNovel.GetPages());
     }
 
+    function resize(e)
+    {
+        var activeSlideHeight = e.slides.eq(e.activeIndex).height();
+        e.container.css({ height: activeSlideHeight + 'px' });
+    }
+
     function attached(view)
     {
-        $.UIHideNavBar();
-
         var swiper = new Swiper('.swiper-container',
            {
                preloadImages: true,
                direction: 'horizontal',
+               simulateTouch: true,
+               preventClicksPropagation: false,
            });
+
+        $.UIHideNavBar();
+
+        resize(swiper);
 
         // Add one more handler for this event
         swiper.on('onSlideChangeStart', function (p) {
-            var activeSlideHeight = p.slides.eq(p.activeIndex).height();
-            p.container.css({ height: activeSlideHeight + 'px' });
+            resize(p);           
         });
 
         // Add one more handler for this event
         swiper.on('onSlideChangeEnd', function (p) {
+            resize(p);
             window.scrollTo(0, 0);
-            var activeSlideHeight = p.slides.eq(p.activeIndex).height();
-            p.container.css({ height: window.innerHeight + 'px' });
         });
 
-        $('body').on('longtap', function () {
-            $.UIShowNavBar();
-        });
-
-        $('swiper-container').on('singletap', function () {
+        $('tapDetector').on('singletap', function (p){
             $.UIHideNavBar();
         });
+
+        $('body').on('longtap', function (e){            
+            $.UIShowNavBar();
+        });     
     }
 
     return {
