@@ -19,7 +19,9 @@ var LightReader;
             var chapter = this.model.chapterList[i];
             $.ajax({
                 url: "http://www.baka-tsuki.org" + chapter.url,
-                success: $.proxy(function (result) { this.GetChapter(result, i); }, this)
+                success: $.proxy(function (result) {
+                    this.GetChapter(result, i);
+                }, this)
             });
         };
         BakaTsukiParser.prototype.GetChapter = function (content, chapter) {
@@ -68,14 +70,14 @@ var LightReader;
                     this.model.chapterList[chapter].pages.push(tempParaText);
                 }
             }
-            //get all image from chapter 
             for (var pictureName in this.model.chapterList[chapter].images) {
                 this.retrieveImage(pictureName, chapter);
             }
         };
         BakaTsukiParser.prototype.retrieveImage = function (pictureName, chapterIndex) {
-            $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done //avoid warning with & at the end ><
-            ($.proxy(function (results) { this.onGetImage(results, chapterIndex); }, this));
+            $.getJSON(BakaTsukiParser.IMAGE_QUERY + pictureName + "&").done($.proxy(function (results) {
+                this.onGetImage(results, chapterIndex);
+            }, this));
         };
         BakaTsukiParser.prototype.onGetImage = function (results, chapterIndex) {
             this.nbImageDown++;
@@ -104,7 +106,7 @@ var LightReader;
                                     if (finalUrl.length > 0) {
                                         fileUrl = finalUrl[1]; //right part
                                     }
-                                    break; // yes so we quit the loop
+                                    break;
                                 }
                             }
                         }

@@ -1,16 +1,27 @@
-﻿<!--
-    <a href="#reader/1">Debug Novels</a>
+﻿<article id='list'>
+    <div class="ui fixed inverted main menu">
+        <div class="container">
 
-    -->
-<article id='list'>
-        <ul class='list' data-bind="foreach: list"><!--, click: onClick-->
-            <li class='comp' data-goto data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
-                <div>
-                    <p data-bind="text: $data.title" />
+            <div class="right menu">
+                <div class="ui language dropdown item" id="menu" data-content="Main Menu">
+                    <i class="ellipsis vertical icon"></i>
+                    <div class="menu">
+                        <div class="item" data-percent="100" data-value="en">Option</div>
+                        <div class="item" data-percent="100" data-value="da">About</div>
+                    </div>
                 </div>
-                <aside>
-                    <span class='nav'></span>
-                </aside>
-            </li>
-        </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui big celled selection list" data-bind="foreach: list">
+        <div class="item" data-goto data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
+           
+            <div class="content">
+                <div class="header"><p data-bind="text: $data.title" /></div>
+                last update : never
+            </div>
+
+        </div>
+    </div>       
 </article>

@@ -4,7 +4,8 @@
         ko = require('knockout'),
         swiper = require('swiper'),
         jquery = require('jquery'),
-        chocolate = require('chocolate');
+        Hammer = require('hammer'),
+        semantic = require('semantic');
 
 
     function activate(volume, index)
@@ -17,8 +18,7 @@
 
     function resize(e)
     {
-        var activeSlideHeight = e.slides.eq(e.activeIndex).height();
-        e.container.css({ height: activeSlideHeight + 'px' });
+        e.container.css({ height: document.body.clientHeight + 'px' });
     }
 
     function attached(view)
@@ -30,8 +30,6 @@
                simulateTouch: true,
                preventClicksPropagation: false,
            });
-
-        $.UIHideNavBar();
 
         resize(swiper);
 
@@ -45,14 +43,30 @@
             resize(p);
             window.scrollTo(0, 0);
         });
+        
+        $('.ui.dropdown').dropdown();
 
-        $('tapDetector').on('singletap', function (p){
-            $.UIHideNavBar();
+        $('.main.menu').transition('slide down');
+        
+        
+        var mc = new Hammer($('tapDetector').get(0));
+        mc.on("press", function (ev)
+        {
+            if ($('.main.menu').transition('is visible') == false)
+            {
+                $('.main.menu').transition('slide down');
+            }
         });
 
-        $('body').on('longtap', function (e){            
-            $.UIShowNavBar();
-        });     
+        mc = new Hammer($('tapDetector').get(0));
+        mc.on("tap", function (ev)
+        {
+            if ($('.main.menu').transition('is visible') == true)
+            {
+                $('.main.menu').transition('slide down');
+            }
+        });
+               
     }
 
     return {

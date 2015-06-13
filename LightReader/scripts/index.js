@@ -15,9 +15,9 @@ var LightReader;
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-            var parser = new LightReader.MenuParser();
-            parser.onLightNovelListComplete = onLightNovelListComplete;
-            parser.Parse("English");
+            //var parser: MenuParser = new MenuParser();
+            //parser.onLightNovelListComplete = onLightNovelListComplete;
+            //parser.Parse("English");            
         }
         function onPause() {
             // TODO: This application has been suspended. Save application state here.

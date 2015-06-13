@@ -37,6 +37,11 @@
                     else {
                         res.push(page);
                     }
+
+                    if (page.length == 10)
+                    {
+                        return res;
+                    }
                 }                            
             }
             return res;

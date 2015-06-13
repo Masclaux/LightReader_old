@@ -1,21 +1,38 @@
-﻿<nav>
-    <button class="back">Back</button>
-    <h1>Light Reader</h1>
+﻿<article id='list'>
 
+    <div class="ui fixed inverted main menu">
+        <div class="container">
 
-    <button class='align-flush'>
-        <i class="fa fa-align-justify  fa-2x" />
-    </button>
+            <div class="right menu">
+                <div class="ui language dropdown item" id="menu" data-content="Main Menu">
+                    <i class="ellipsis vertical icon"></i>
+                    <div class="menu">
+                        <div class="item" data-percent="100" data-value="en">Option</div>
+                        <div class="item" data-percent="100" data-value="da">About</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    
-</nav>
-
-<article id='list'>
-
-        <button data-bind="click: onClick" class="action">
-            List Novels
-        </button>
-
-        <a href="#reader/1/1">Debug Novels</a>          
-
+    <div class="ui internally grid">
+        <div class="row">
+            <div class="three wide column"/>
+            <div class="ten wide column">
+                <div class="fluid ui primary button" data-bind="click: onClick">
+                    List Novels
+                </div>
+                <br />
+                <div class="fluid  ui primary button" data-bind="click: onClick">
+                    Options
+                </div>
+                <br /><br />
+                <a href="#reader/1/1">Debug Novels</a>
+            </div>
+            <div class="three wide column"/>
+        </div>
+    </div>
+     
 </article>
+
+

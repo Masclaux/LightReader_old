@@ -1,7 +1,8 @@
 ﻿define(function (require)
 {
     var app = require('durandal/app'),
-        ko = require('knockout');
+        ko = require('knockout'),
+        semantic = require('semantic');
 
     var activate = function (id)
     {
@@ -18,7 +19,14 @@
         id: ko.observable(),
         list : ko.observable(),
         activate: activate,
+        attached: attached,
     };
+
+    function attached(view)
+    {
+        $('.ui.dropdown').dropdown();
+    }
+
 
 });
 

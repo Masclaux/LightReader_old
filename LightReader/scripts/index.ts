@@ -24,9 +24,9 @@ module LightReader {
 
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
 
-            var parser: MenuParser = new MenuParser();
-            parser.onLightNovelListComplete = onLightNovelListComplete;
-            parser.Parse("English");            
+            //var parser: MenuParser = new MenuParser();
+            //parser.onLightNovelListComplete = onLightNovelListComplete;
+            //parser.Parse("English");            
         }
 
         function onPause() {
