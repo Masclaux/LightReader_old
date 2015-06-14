@@ -154,6 +154,7 @@
     <Content Include="scripts\libs\durandal\js\transitions\entrance.js" />
     <Content Include="scripts\libs\durandal\js\viewEngine.js" />
     <Content Include="scripts\libs\durandal\js\viewLocator.js" />
+    <Content Include="scripts\libs\fastclick\fastclick.js" />
     <Content Include="scripts\libs\hammer\hammer.min.js" />
     <Content Include="scripts\libs\jquery\jquery.js" />
     <Content Include="scripts\libs\knockout\knockout-3.1.0.debug.js" />

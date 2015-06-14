@@ -1,7 +1,8 @@
 ﻿
 ///<reference path="model/AppModel.ts"/>
 
-module LightReader {
+module LightReader 
+{
     "use strict";
 
     export module Application 

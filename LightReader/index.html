@@ -31,6 +31,14 @@
     <!-- External lib  -->
     <script src="scripts/libs/jquery/jquery.js"></script>
 
+    <script src='/scripts/libs/fastclick/fastclick.js'>
+
+        $(function ()
+        {
+            FastClick.attach(document.body);
+        });
+
+    </script>
 
     <script src="scripts/libs/require/require.js" data-main="scripts/appConfig"></script>
 

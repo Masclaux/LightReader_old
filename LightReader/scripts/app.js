@@ -108,7 +108,6 @@ var LightReader;
         }
         NovelVolume.prototype.GetPages = function () {
             var res = new Array();
-            var bite = 0;
             for (var c in this.chapterList) {
                 for (var p in this.chapterList[c].pages) {
                     var page = this.chapterList[c].pages[p];
@@ -117,13 +116,7 @@ var LightReader;
                         var id = page.split(";;")[1];
                         page = "<img src='" + this.chapterList[c].images[id].url + "'style='width:100%'/>";
                     }
-                    else {
-                        bite++;
-                        res.push(page);
-                    }
-                    if (bite == 10) {
-                        return res;
-                    }
+                    res.push(page);
                 }
             }
             return res;
