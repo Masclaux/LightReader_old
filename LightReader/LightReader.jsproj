@@ -132,7 +132,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\reader.css" />
-    <Content Include="css\swiper.css" />
+    <Content Include="res\native\android\lightReader.keystore" />
     <Content Include="scripts\appConfig.js" />
     <Content Include="scripts\libs\durandal\css\durandal.css" />
     <Content Include="scripts\libs\durandal\img\icon.png" />
@@ -155,9 +155,6 @@
     <Content Include="scripts\libs\durandal\js\viewEngine.js" />
     <Content Include="scripts\libs\durandal\js\viewLocator.js" />
     <Content Include="scripts\libs\hammer\hammer.min.js" />
-    <Content Include="scripts\libs\iscroll\iscroll.js" />
-    <Content Include="scripts\libs\iscroll\scroll.js" />
-    <Content Include="scripts\libs\iscroll\styles.css" />
     <Content Include="scripts\libs\jquery\jquery.js" />
     <Content Include="scripts\libs\knockout\knockout-3.1.0.debug.js" />
     <Content Include="scripts\libs\knockout\knockout-3.1.0.js" />
@@ -310,7 +307,8 @@
     <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.woff" />
     <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.woff2" />
     <Content Include="scripts\libs\semantic\themes\default\assets\images\flags.png" />
-    <Content Include="scripts\libs\swiper\swiper.js" />
+    <Content Include="scripts\libs\swiper\css\swiper.min.css" />
+    <Content Include="scripts\libs\swiper\swiper.min.js" />
     <Content Include="scripts\viewmodels\detail.js" />
     <Content Include="scripts\viewmodels\home.js" />
     <Content Include="scripts\viewmodels\list.js" />
@@ -445,7 +443,6 @@
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Distribution'">
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>

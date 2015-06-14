@@ -7,7 +7,7 @@
         'knockout': 'libs/knockout/knockout-3.1.0',
         'jquery': 'libs/jquery/jquery',
         'hammer': 'libs/hammer/hammer.min',
-        'swiper': 'libs/swiper/swiper',
+        'swiper': 'libs/swiper/swiper.min',
         'semantic': 'libs/semantic/semantic',
         'model': 'model',
         'constant': 'constant',

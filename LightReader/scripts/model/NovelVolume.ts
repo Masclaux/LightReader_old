@@ -19,7 +19,7 @@
         
         public GetPages(): Array<string>
         {
-            var res: Array<string> = new Array<string>();
+            var res: Array<string> = new Array<string>(); 
 
             for (var c in this.chapterList)
             {
@@ -34,14 +34,8 @@
                         var id: string = page.split(";;")[1];
                         page = "<img src='" + this.chapterList[c].images[id].url + "'style='width:100%'/>";
                     }
-                    else {
-                        res.push(page);
-                    }
 
-                    if (page.length == 10)
-                    {
-                        return res;
-                    }
+                    res.push(page);                              
                 }                            
             }
             return res;

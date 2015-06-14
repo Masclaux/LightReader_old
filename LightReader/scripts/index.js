@@ -15,9 +15,9 @@ var LightReader;
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
             // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-            //var parser: MenuParser = new MenuParser();
-            //parser.onLightNovelListComplete = onLightNovelListComplete;
-            //parser.Parse("English");            
+            var parser = new LightReader.MenuParser();
+            parser.onLightNovelListComplete = onLightNovelListComplete;
+            parser.Parse("English");
         }
         function onPause() {
             // TODO: This application has been suspended. Save application state here.
@@ -46,7 +46,6 @@ var LightReader;
     }
     function onParsingComplete(parser) {
         LightReader.AppModel.Inst().novelList[0].volumeList[1] = parser.model;
-        LightReader.AppModel.Inst().novelList[0].volumeList[1].GetPages();
     }
 })(LightReader || (LightReader = {}));
 //# sourceMappingURL=index.js.map
