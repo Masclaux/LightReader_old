@@ -1,40 +1,66 @@
-﻿.swiper-slide
- {
-   height: 100%;
-   overflow: auto;
-   color: #333333;
-   background-color :#ffffff;
+﻿body
+{
+    font-size: 100%;   
 }
 
-.swiper-slide h1
+swiper-content
+ {
+   height: 100%;
+   overflow: auto;  
+}
+
+swiper-content h1
 {
     font-family: Helvetica, Arial, sans-serif;
     font-weight : bold;
     color: #333333; 
+    font-size: 2.5em;
+
+    padding-left  : 5%;  
+    padding-right : 5%;
+
 }
-.swiper-slide h2
+
+swiper-content h2
 {
     font-family: Helvetica, Arial, sans-serif;
     font-weight : bold;
     color: #333333;
+    font-size: 2em;
+    
+    padding-left  : 5%;  
+    padding-right : 5%;
 }
 
-.swiper-slide h3
+swiper-content h3
 {
     font-family: Helvetica, Arial, sans-serif;
     font-weight : bold;
     color: #333333;
+    font-size: 1.5em;
+
+    padding-left  : 5%;  
+    padding-right : 5%;
+
 }
 
-.swiper-slide p
+swiper-content p
 {
     color: #333333;
     font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.2em;
+    
+    padding-left  : 5%;  
+    padding-right : 5%;
 }
 
-#footer {
+#footer 
+{
     text-align: right;
     width: 100%;
 }
 
-
+.ui.dropdown .menu > .item 
+{
+  padding: 1.25em 1.14285714em !important;
+}

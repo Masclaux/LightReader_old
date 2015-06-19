@@ -13,15 +13,15 @@
             </div>
         </div>
     </div>
+    <div class="ui segment">
+        <div class="ui big celled selection list" data-bind="foreach: list">
+            <div class="item" data-goto data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
 
-    <div class="ui big celled selection list" data-bind="foreach: list">
-        <div class="item" data-goto data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
-           
-            <div class="content">
-                <div class="header"><p data-bind="text: $data.title" /></div>
-                last update : never
+                <div class="content">
+                    <div class="header"><p data-bind="text: $data.title" /></div>
+                    last update : never
+                </div>
             </div>
-
         </div>
-    </div>       
+    </div>   
 </article>
