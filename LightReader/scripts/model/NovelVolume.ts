@@ -16,10 +16,10 @@
         public currentPage: Number;
 
         public lastPos: Number;
-        
+              
         public GetPages(): Array<string>
         {
-            var res: Array<string> = new Array<string>(); 
+            var res: Array<string> = new Array<string>();           
 
             for (var c in this.chapterList)
             {

@@ -310,11 +310,13 @@
     <Content Include="scripts\libs\semantic\themes\default\assets\images\flags.png" />
     <Content Include="scripts\libs\swiper\css\swiper.min.css" />
     <Content Include="scripts\libs\swiper\swiper.min.js" />
+    <Content Include="scripts\viewmodels\debug\debugreader.js" />
     <Content Include="scripts\viewmodels\detail.js" />
     <Content Include="scripts\viewmodels\home.js" />
     <Content Include="scripts\viewmodels\list.js" />
     <Content Include="scripts\viewmodels\main.js" />
     <Content Include="scripts\viewmodels\reader.js" />
+    <Content Include="scripts\views\debug\debugreader.html" />
     <Content Include="scripts\views\detail.html" />
     <Content Include="scripts\views\home.html" />
     <Content Include="scripts\views\list.html" />

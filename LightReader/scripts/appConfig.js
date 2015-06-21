@@ -17,7 +17,7 @@
 
 define(['durandal/system', 'durandal/app', 'durandal/viewLocator'], function (system, app, viewLocator) {
     //>>excludeStart("build", true);
-    system.debug(true);
+    system.debug(false);
     //>>excludeEnd("build");
 
     app.title = 'Durandal Starter Kit';
@@ -34,5 +34,8 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator'], function (sy
 
         //Show the app by setting the root view model for our application with a transition.
         app.setRoot('viewmodels/main', 'entrance');
+
+       // app.setRoot('viewmodels/debug/debugreader', 'entrance');
+        
     });
 });

@@ -10,15 +10,13 @@
     var currentPage = 0;
 
     var pageslist;
-
-    var pages = ko.observableArray();
-
     var onMouve = false;
 
+    var pages = ko.observableArray();
     function activate(volume, index)
     {
         pages([]);
-
+      
         var model      = LightReader.AppModel.Inst();
         var lightNovel = model.novelList[0].volumeList[1];
              
@@ -29,14 +27,15 @@
 
     function pageTo(start, end)
     {
-        pages.removeAll();
+        if (start >= 0) {
+            pages.removeAll();
 
-        for (var i = start; i <= end; i++)
-        {
-            pages.push(pageslist[i]);
+            for (var i = start; i <= end; i++) {
+                pages.push({ index: i + 1, content: pageslist[i], visible: !pageslist[i].startsWith("<img sr") });
+            }
+
+            currentPage = end;
         }
-
-        currentPage = end;
     }
     
     function resize(e)
@@ -64,7 +63,6 @@
         // Add one more handler for this event
         swiper.on('onSlideChangeEnd', function (p)
         {
-
             if (swiper.activeIndex == 2 || swiper.activeIndex == 0)
             {
                     if (swiper.activeIndex > swiper.previousIndex)
@@ -78,6 +76,7 @@
 
                     swiper.slideTo(1, 0);                        
             }
+                       
 
             swiper.updateSlidesSize();
             swiper.updateProgress();

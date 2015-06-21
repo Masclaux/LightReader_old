@@ -14,18 +14,20 @@
             </div>
         </div>
     </div>
-
-        <tapdetector>
-            <tapdetector>
+    
+                <tapdetector>
                 <div class="swiper-container">
-                    <div class=" swiper-wrapper" data-bind="foreach: pages">
+                    <div class=" swiper-wrapper" data-bind="foreach: pages">                        
                         <div class="swiper-slide">
-                            <span data-bind="html: $data" />
-                            <div id="footer" data-bind="text: $index" />
+                            <swiper-content>
+                                <span data-bind="html: $data.content" />
+                            </swiper-content>     
+                            <swiper-foot data-bind="visible: $data.visible">
+                                <span data-bind="text: $data.index" />
+                            </swiper-foot>            
                         </div>
                     </div>
                 </div>
             </tapdetector>
-        </tapdetector>
    
 </article>

@@ -3,7 +3,7 @@
         ko = require('knockout'),
         jquery = require('jquery'),       
         semantic = require('semantic'),
-                Hammer = require('hammer'),
+        Hammer = require('hammer'),
 
         router = require('plugins/router')
     ;
@@ -11,7 +11,8 @@
     return {
         name: ko.observable(),
         attached : attached,
-        onClick: function () { router.navigate('list'); }
+        onClick: function () { router.navigate('list') },
+        onClickDebug: function () { router.navigate('readerdebug'); }
     };
     
 
