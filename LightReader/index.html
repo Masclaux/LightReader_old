@@ -33,10 +33,9 @@
 
     <script src='/scripts/libs/fastclick/fastclick.js'>
 
-        $(function ()
-        {
-            FastClick.attach(document.body);
-        });
+        window.addEventListener('load', function () {
+            new FastClick(document.body);
+        }, false);
 
     </script>
 
