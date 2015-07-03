@@ -132,6 +132,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\reader.css" />
+    <Content Include="css\tiles.css" />
     <Content Include="res\native\android\lightReader.keystore" />
     <Content Include="scripts\appConfig.js" />
     <Content Include="scripts\libs\durandal\css\durandal.css" />

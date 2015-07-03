@@ -1,82 +1,62 @@
-﻿/* css from  http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/ */
-
-.wrap {
-   overflow: hidden;
-   margin: 10px;
-}
-.boxd {
-  float: left;
-     position: relative;
-     width: 20%;
-     padding-bottom: 20%;
-   background-color: red;
+﻿#wrap
+{
+  overflow: hidden;
 }
 
-
-.box {
-  float: left;
+.box
+{
+  width: 25%;
+  padding-bottom: 20%;
+  color: #FFF;
   position: relative;
-  display: table;
-  width: 250px;
+  float: left;
+
+  background: white;
+}
+
+.innerContent {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  background: #66F;
+  padding-left: 10px;
+  padding-right: 10px;
   height: 100%;
-  text-align: center;
-  border: 1px solid red;
+  width: 100%;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
-.boxInner {
-  display: table-cell;
-  vertical-align: middle;
+.innerContent:active {
+  left: 3px;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
+}
+
+.innerContent p
+{
+
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  text-align:center;
+  font-size : 1.5em;
+  overflow : hidden;
+  
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+   user-select: none;
 
 }
 
 
-
-.boxInnerd {
-   background-color:yellow;
-   position: absolute;
- left: 10px;
- right: 10px;
- top: 10px;
- bottom: 10px;
- overflow: hidden;
- text-align: center;
-
--webkit-transform-style: preserve-3d;
--moz-transform-style: preserve-3d;
-transform-style: preserve-3d;
-
-}
-
-
-body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
-   margin-bottom: 0;
-}
-
-@media only screen and (max-width : 480px) {
-   /* Smartphone view: 1 tile */
-   .box {
-      width: 100%;
-      padding-bottom: 100%;
-   }
-}
-@media only screen and (max-width : 650px) and (min-width : 481px) {
-   /* Tablet view: 2 tiles */
-   .box {
-      width: 50%;
-      padding-bottom: 50%;
-   }
-}
-@media only screen and (max-width : 1050px) and (min-width : 651px) {
-   /* Small desktop / ipad view: 3 tiles */
-   .box {
-      width: 33.3%;
-      padding-bottom: 33.3%;
-   }
-}
-@media only screen and (max-width : 1290px) and (min-width : 1051px) {
-   /* Medium desktop: 4 tiles */
-   .box {
-      width: 25%;
-      padding-bottom: 25%;
-   }
-}
