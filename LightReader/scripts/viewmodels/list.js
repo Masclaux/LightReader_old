@@ -2,7 +2,6 @@
 {
     var app = require('durandal/app'),
         ko = require('knockout'),
-        jquery = require('jquery'),
         semantic = require('semantic'),
         router = require('plugins/router');
 

@@ -431,6 +431,7 @@
     <TypeScriptCompile Include="scripts\model\NovelContent.ts" />
     <TypeScriptCompile Include="scripts\model\NovelImage.ts" />
     <TypeScriptCompile Include="scripts\model\NovelVolume.ts" />
+    <TypeScriptCompile Include="scripts\model\Source.ts" />
     <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
     <TypeScriptCompile Include="scripts\parser\DetailParser.ts" />
     <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />

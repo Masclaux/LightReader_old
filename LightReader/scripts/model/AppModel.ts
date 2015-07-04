@@ -5,6 +5,10 @@
     {
         private static inst: AppModel = new AppModel();
 
+
+        public sources: Array<Source> = new Array<Source>();      
+
+
         public novelList: Array<NovelContent> = new Array<NovelContent>();      
 
         //return object instance

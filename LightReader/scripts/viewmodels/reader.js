@@ -10,7 +10,8 @@
     var currentPage = 0;
 
     var pageslist;
-    var onMouve = false;
+    var allowClick = true;
+
 
     var pages = ko.observableArray();
     function activate(volume, index)
@@ -31,7 +32,7 @@
             pages.removeAll();
 
             for (var i = start; i <= end; i++) {
-                pages.push({ index: i + 1, content: pageslist[i], visible: !pageslist[i].startsWith("<img sr") });
+                pages.push({ index: i + 1, content: pageslist[i], visible: pageslist[i].indexOf("<img sr") != 0 });
             }
 
             currentPage = end;
@@ -85,6 +86,16 @@
             window.scrollTo(0, 0);
 
         });
+
+        swiper.on("onSliderMove", function (ev)
+        {
+            allowClick = false;         
+        });
+
+        swiper.on("onTransitionEnd", function (ev)
+        {
+            allowClick = true;
+        });
         
         $('.ui.dropdown').dropdown();
 
@@ -94,7 +105,7 @@
         var mc = new Hammer($('tapDetector').get(0));
         mc.on("press", function (ev)
         {
-            if ($('.main.menu').transition('is visible') == false && swiper.progress == 0)
+            if ($('.main.menu').transition('is visible') == false && allowClick)
             {
                 $('.main.menu').transition('slide down');
             }
@@ -103,12 +114,11 @@
         mc = new Hammer($('tapDetector').get(0));
         mc.on("tap", function (ev)
         {
-            if ($('.main.menu').transition('is visible') == true && swiper.progress == 0)
+            if ($('.main.menu').transition('is visible') == true && allowClick)
             {
                 $('.main.menu').transition('slide down');
             }
-        });
-               
+        });                         
     }
 
     return {        

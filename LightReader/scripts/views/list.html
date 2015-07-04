@@ -13,16 +13,23 @@
             </div>
         </div>
     </div>
-    <div class="ui segment">
+    <div class="ui grid">
+        <div class="column">
+            <div class="ui segment">
+                <h1 class="ui center aligned icon header"> baka-tsuki</h1>
+                <div class="ui divider" />
+                <img class="ui centered small image" src="https://pbs.twimg.com/profile_images/1502528663/logo_400x400.gif">
+                <p>Baka-Tsuki (BT) is a fan translation community that hosts translations for light novels in the Wiki format. </p>
+            </div>
+            <div class="ui big celled selection list" data-bind="foreach: list">
+                <div class="item" data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
 
-        <div class="ui big celled selection list" data-bind="foreach: list">
-            <div class="item" data-bind="click :function(){ $parent.onNovelSelected( $parent, $data);}">
-
-                <div class="content">
-                    <div class="header"><p data-bind="text: $data.title" /></div>
-                    last update : never
+                    <div class="content">
+                        <div class="header"><p data-bind="text: $data.title" /></div>
+                        last update : never
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>   
+        </div>       
+    </div>
 </article>

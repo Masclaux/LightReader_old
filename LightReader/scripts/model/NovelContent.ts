@@ -15,6 +15,8 @@
 
         public title: string;
 
+        public synopsis: String = "test synopsis ";
+
         public volumeList: Array<NovelVolume>;
     }
 }

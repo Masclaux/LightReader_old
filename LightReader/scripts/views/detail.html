@@ -14,14 +14,37 @@
         </div>
     </div>
 
-    <!-- List all novels -->
-    <span data-bind="text: id"></span>
+    <div class="ui grid">
+        <div class="column">
+            <div class="ui segment">
+                <h1 class="ui center aligned icon header" data-bind="text: id"/>
+                <div class="ui divider" />
+                <img class="ui centered small image" src="https://pbs.twimg.com/profile_images/1502528663/logo_400x400.gif">
+              <p>test </p>
 
-    <!-- List all novels -->
+                <!--<span data-bind="text: synopsis"></span>-->
+                
+            </div>
+
+            <!-- List all volume -->
+            <div class="ui big celled selection list" data-bind="foreach: list">
+                <div class="item" data-bind="click :function(){ $parent.onVolumeSelected( $parent, $data);}">
+
+                    <div class="content">
+                        <div class="header"><p data-bind="text: $data.title" /></div>
+                        last update : never
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- List all novels
     <ul data-bind="foreach: list">
         <li>
             <a data-bind="attr:{href: '#reader/' + $index() }, text: $data.title" />
         </li>
-    </ul>   
+    </ul>    -->
 
 </section>
