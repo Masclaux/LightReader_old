@@ -339,7 +339,6 @@
     <Folder Include="res\screens\ios\" />
     <Folder Include="res\screens\windows\" />
     <Folder Include="res\screens\wp8\" />
-    <Folder Include="scripts\libs\NewFolder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml">

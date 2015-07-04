@@ -62,7 +62,7 @@
         });
 
         // Add one more handler for this event
-        swiper.on('onSlideChangeEnd', function (p)
+        swiper.on('onTransitionEnd', function (p)
         {
             if (swiper.activeIndex == 2 || swiper.activeIndex == 0)
             {
@@ -75,7 +75,9 @@
                         pageTo(currentPage - 3, currentPage-1);
                     }
 
-                    swiper.slideTo(1, 0);                        
+                    swiper.slideTo(1, 0);
+
+                    allowClick = true;
             }
                        
 
@@ -91,11 +93,6 @@
         {
             allowClick = false;         
         });
-
-        swiper.on("onTransitionEnd", function (ev)
-        {
-            allowClick = true;
-        });
         
         $('.ui.dropdown').dropdown();
 
@@ -105,8 +102,8 @@
         var mc = new Hammer($('tapDetector').get(0));
         mc.on("press", function (ev)
         {
-            if ($('.main.menu').transition('is visible') == false && allowClick)
-            {
+            if ($('.main.menu').first().transition('is visible')== false && allowClick)
+            {               
                 $('.main.menu').transition('slide down');
             }
         });
@@ -114,7 +111,7 @@
         mc = new Hammer($('tapDetector').get(0));
         mc.on("tap", function (ev)
         {
-            if ($('.main.menu').transition('is visible') == true && allowClick)
+            if ($('.main.menu').first().transition('is visible') == true && allowClick)
             {
                 $('.main.menu').transition('slide down');
             }
@@ -126,6 +123,5 @@
         pages: pages,
         attached: attached,
     };
-
 });
 

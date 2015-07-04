@@ -4,7 +4,7 @@
         <div class="container">
 
             <div class="right menu">
-                <div class="ui language dropdown item" id="menu" data-content="Main Menu">
+                <div class="ui dropdown item" id="menu" data-content="Main Menu">
                     <i class="ellipsis vertical icon"></i>
                     <div class="menu">
                         <div class="item" data-percent="100" data-value="en">Option</div>
@@ -14,20 +14,21 @@
             </div>
         </div>
     </div>
-    
-                <tapdetector>
-                <div class="swiper-container">
-                    <div class=" swiper-wrapper" data-bind="foreach: pages">                        
-                        <div class="swiper-slide">
-                            <swiper-content>
-                                <span data-bind="html: $data.content" />
-                            </swiper-content>     
-                            <swiper-foot data-bind="visible: $data.visible">
-                                <span data-bind="text: $data.index" />
-                            </swiper-foot>            
-                        </div>
-                    </div>
+
+    <tapdetector>
+        <div class="swiper-container">
+            <div class=" swiper-wrapper" data-bind="foreach: pages">
+                <div class="swiper-slide">
+                    <swiper-content>
+                        <span data-bind="html: $data.content" />
+                    </swiper-content>
+                    <swiper-foot data-bind="visible: $data.visible">
+                        <span data-bind="text: $data.index" />
+                    </swiper-foot>
                 </div>
-            </tapdetector>
-   
+            </div>
+        </div>
+    </tapdetector>
+
 </article>
+
