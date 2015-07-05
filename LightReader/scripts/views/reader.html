@@ -1,34 +1,46 @@
 ﻿<article id='reader'>
-
-    <div class="ui fixed inverted main menu">
-        <div class="container">
+    
+    <!-- Top bar -->
+    <div class="ui inverted top fixed main menu">    
+        <span /> <!-- if not span menu note visible on ripple-->
+            <div class="ui black right attached fixed launch button">
+                <i class="content icon"></i>
+                <span class="text" data-bind="text: title" />
+            </div>
 
             <div class="right menu">
-                <div class="ui dropdown item" id="menu" data-content="Main Menu">
+                <div class="ui dropdown item">
                     <i class="ellipsis vertical icon"></i>
                     <div class="menu">
-                        <div class="item" data-percent="100" data-value="en">Option</div>
-                        <div class="item" data-percent="100" data-value="da">About</div>
+                        <div class="item" data-percent="100">Option</div>
+                        <div class="item" data-percent="100">About</div>
+                    </div>
+                </div>
+            </div>s    
+    </div>
+    
+    <!-- left bar  -->
+    <div class="ui vertical sidebar inverted menu">
+        <a href="#" class="item" onclick="history.back();">Back</a>
+        <a href="#" class="item">Previous chapter</a>
+        <a href="#" class="item">Next chapter</a>
+    </div>
+
+    <div class="pusher">
+        <tapdetector>
+            <div class="swiper-container">
+                <div class=" swiper-wrapper" data-bind="foreach: pages">
+                    <div class="swiper-slide">
+                        <swiper-content>
+                            <span data-bind="html: $data.content" />
+                        </swiper-content>
+                        <swiper-foot data-bind="visible: $data.visible">
+                            <span data-bind="text: $data.index" />
+                        </swiper-foot>
                     </div>
                 </div>
             </div>
-        </div>
+        </tapdetector>
     </div>
-
-    <tapdetector>
-        <div class="swiper-container">
-            <div class=" swiper-wrapper" data-bind="foreach: pages">
-                <div class="swiper-slide">
-                    <swiper-content>
-                        <span data-bind="html: $data.content" />
-                    </swiper-content>
-                    <swiper-foot data-bind="visible: $data.visible">
-                        <span data-bind="text: $data.index" />
-                    </swiper-foot>
-                </div>
-            </div>
-        </div>
-    </tapdetector>
-
 </article>
 

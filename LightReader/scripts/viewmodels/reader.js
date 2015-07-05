@@ -14,6 +14,8 @@
 
 
     var pages = ko.observableArray();
+    var title = "";
+
     function activate(volume, index)
     {
         pages([]);
@@ -24,6 +26,8 @@
         pageslist = lightNovel.GetPages();
         
         pageTo(0, 2);
+
+        this.title(lightNovel.title);
     }
 
     function pageTo(start, end)
@@ -96,7 +100,10 @@
         
         $('.ui.dropdown').dropdown();
 
-        $('.main.menu').transition('slide down');
+       $('.main.menu').transition('slide down');
+
+       $('.ui.sidebar')
+           .sidebar('attach events', '.launch.button', 'slide out');
         
         
         var mc = new Hammer($('tapDetector').get(0));
@@ -122,6 +129,7 @@
         activate: activate,
         pages: pages,
         attached: attached,
+        title:ko.observable(),
     };
 });
 
