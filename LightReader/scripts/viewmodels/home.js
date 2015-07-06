@@ -6,7 +6,6 @@
     ;
 
     return {
-        name: ko.observable(),
         attached : attached,
         onClick: function () { router.navigate('list') },
         onClickDebug: function () { router.navigate('readerdebug'); }

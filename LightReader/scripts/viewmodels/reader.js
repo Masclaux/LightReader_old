@@ -14,20 +14,16 @@
 
 
     var pages = ko.observableArray();
-    var title = "";
+    var novel;
 
     function activate(volume, index)
     {
         pages([]);
       
-        var model      = LightReader.AppModel.Inst();
-        var lightNovel = model.novelList[0].volumeList[1];
-             
-        pageslist = lightNovel.GetPages();
+       this.novel =  LightReader.AppModel.Inst().novelList[0].volumeList[1];             
+       pageslist = this.novel.GetPages();
         
-        pageTo(0, 2);
-
-        this.title(lightNovel.title);
+        pageTo(0, 2);       
     }
 
     function pageTo(start, end)
@@ -61,8 +57,7 @@
         // Add one more handler for this event
         swiper.on('onSlideChangeStart', function (p)
         {
-            resize(p);                     
-          
+            resize(p);   
         });
 
         // Add one more handler for this event
@@ -109,7 +104,7 @@
         var mc = new Hammer($('tapDetector').get(0));
         mc.on("press", function (ev)
         {
-            if ($('.main.menu').first().transition('is visible')== false && allowClick)
+            if ($('.main.menu').first().transition('is visible')== false)// && allowClick)
             {               
                 $('.main.menu').transition('slide down');
             }
@@ -118,7 +113,7 @@
         mc = new Hammer($('tapDetector').get(0));
         mc.on("tap", function (ev)
         {
-            if ($('.main.menu').first().transition('is visible') == true && allowClick)
+            if ($('.main.menu').first().transition('is visible') == true)// && allowClick)
             {
                 $('.main.menu').transition('slide down');
             }
@@ -129,7 +124,7 @@
         activate: activate,
         pages: pages,
         attached: attached,
-        title:ko.observable(),
+        novel: ko.observable(),
     };
 });
 

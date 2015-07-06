@@ -2,6 +2,7 @@ var LightReader;
 (function (LightReader) {
     var AppModel = (function () {
         function AppModel() {
+            this.sources = new Array();
             this.novelList = new Array();
             if (AppModel.inst) {
                 throw new Error("Error: Instantiation failed: Use AppModel.getInstance() instead of new.");
@@ -77,6 +78,7 @@ var LightReader;
 (function (LightReader) {
     var NovelContent = (function () {
         function NovelContent() {
+            this.synopsis = "test synopsis ";
             this.url = "";
             this.title = "";
             this.volumeList = new Array();
@@ -124,6 +126,16 @@ var LightReader;
         return NovelVolume;
     })();
     LightReader.NovelVolume = NovelVolume;
+})(LightReader || (LightReader = {}));
+var LightReader;
+(function (LightReader) {
+    var Source = (function () {
+        function Source() {
+            this.novelList = new Array();
+        }
+        return Source;
+    })();
+    LightReader.Source = Source;
 })(LightReader || (LightReader = {}));
 var LightReader;
 (function (LightReader) {

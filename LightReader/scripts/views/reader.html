@@ -5,7 +5,7 @@
         <span /> <!-- if not span menu note visible on ripple-->
             <div class="ui black right attached fixed launch button">
                 <i class="content icon"></i>
-                <span class="text" data-bind="text: title" />
+                <span class="text" data-bind="text: novel.title" />
             </div>
 
             <div class="right menu">
@@ -16,14 +16,20 @@
                         <div class="item" data-percent="100">About</div>
                     </div>
                 </div>
-            </div>s    
+            </div>
     </div>
     
     <!-- left bar  -->
     <div class="ui vertical sidebar inverted menu">
-        <a href="#" class="item" onclick="history.back();">Back</a>
+        <a href="javascript:history.back()" class="item">Back</a>
         <a href="#" class="item">Previous chapter</a>
         <a href="#" class="item">Next chapter</a>
+
+        <span data-bind="foreach: novel.chapterList">
+            <a href="#" class="item">
+                <span data-bind="text: $data.title" />
+            </a>
+        </span>
     </div>
 
     <div class="pusher">
