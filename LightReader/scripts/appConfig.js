@@ -4,7 +4,7 @@
         'durandal': 'libs/durandal/js',
         'plugins': 'libs/durandal/js/plugins',
         'transitions': 'libs/durandal/js/transitions',
-        'knockout': 'libs/knockout/knockout-3.1.0',
+        'knockout': 'libs/knockout/knockout-3.3.0',
         'jquery': 'libs/jquery/jquery',
         'hammer': 'libs/hammer/hammer.min',
         'swiper': 'libs/swiper/swiper.min',

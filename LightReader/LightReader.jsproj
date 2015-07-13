@@ -161,6 +161,8 @@
     <Content Include="scripts\libs\jquery\jquery.js" />
     <Content Include="scripts\libs\knockout\knockout-3.1.0.debug.js" />
     <Content Include="scripts\libs\knockout\knockout-3.1.0.js" />
+    <Content Include="scripts\libs\knockout\knockout-3.3.0.debug.js" />
+    <Content Include="scripts\libs\knockout\knockout-3.3.0.js" />
     <Content Include="scripts\libs\require\almond-custom.js" />
     <Content Include="scripts\libs\require\r.js" />
     <Content Include="scripts\libs\require\require.js" />
