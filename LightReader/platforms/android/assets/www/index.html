@@ -1,0 +1,50 @@
+﻿﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LightReader</title>
+
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="scripts/libs/durandal/css/durandal.css" />
+
+    <link rel="stylesheet" href="scripts/libs/semantic/semantic.css" />
+
+    <!-- Link Swiper's CSS  -->
+    <link rel="stylesheet" href="scripts/libs/swiper/css/swiper.min.css">
+
+    <!-- LightReader references -->
+    <link rel="stylesheet" href="css/reader.css" />
+
+    <!-- LightReader references -->
+    <link rel="stylesheet" href="css/tiles.css" />
+
+</head>
+
+<body>
+
+    <!-- Contain page template -->
+    <div id="applicationHost" />
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+
+    <!-- External lib  -->
+    <script src="scripts/libs/jquery/jquery.js"></script>
+
+    <script src='/scripts/libs/fastclick/fastclick.js'>
+
+        window.addEventListener('load', function () {
+            new FastClick(document.body);
+        }, false);
+
+    </script>
+
+    <script src="scripts/libs/require/require.js" data-main="scripts/appConfig"></script>
+
+    <!--Contain all javascript files-->
+    <script src="scripts/appBundle.js"></script>
+          
+</body>
+</html>

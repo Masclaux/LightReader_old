@@ -1,0 +1,62 @@
+﻿#wrap
+{
+  overflow: hidden;
+}
+
+.box
+{
+  width: 25%;
+  padding-bottom: 20%;
+  color: #FFF;
+  position: relative;
+  float: left;
+
+  background: white;
+}
+
+.innerContent {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  background: #66F;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+  width: 100%;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.innerContent:active {
+  left: 3px;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
+}
+
+.innerContent p
+{
+
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  text-align:center;
+  font-size : 1.5em;
+  overflow : hidden;
+  
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+   user-select: none;
+
+}
+
+

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Android">
@@ -66,400 +66,25 @@
       <Configuration>Release</Configuration>
       <Platform>Windows Phone (Universal)</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Android">
-      <Configuration>Distribution</Configuration>
-      <Platform>Android</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|iOS">
-      <Configuration>Distribution</Configuration>
-      <Platform>iOS</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Windows-AnyCPU">
-      <Configuration>Distribution</Configuration>
-      <Platform>Windows-AnyCPU</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Windows-x64">
-      <Configuration>Distribution</Configuration>
-      <Platform>Windows-x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Windows-x86">
-      <Configuration>Distribution</Configuration>
-      <Platform>Windows-x86</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Windows-ARM">
-      <Configuration>Distribution</Configuration>
-      <Platform>Windows-ARM</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Windows Phone 8">
-      <Configuration>Distribution</Configuration>
-      <Platform>Windows Phone 8</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Distribution|Windows Phone (Universal)">
-      <Configuration>Distribution</Configuration>
-      <Platform>Windows Phone (Universal)</Platform>
-    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4a0dddb5-7a95-4fbf-97cc-616d07737a77}" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>95bb5cb9-92d2-4219-8bcd-b3867369063e</ProjectGuid>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-AnyCPU'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|iOS'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-x64'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-x86'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-ARM'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows Phone 8'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Windows Phone (Universal)'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <ProjectGuid>de3900d0-dbfb-4cab-988c-8bd791cc2841</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0'">
-    <VisualStudioVersion>12.0</VisualStudioVersion>
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="css\reader.css" />
-    <Content Include="css\tiles.css" />
-    <Content Include="res\native\android\lightReader.keystore" />
-    <Content Include="scripts\appConfig.js" />
-    <Content Include="scripts\libs\durandal\css\durandal.css" />
-    <Content Include="scripts\libs\durandal\img\icon.png" />
-    <Content Include="scripts\libs\durandal\img\ios-startup-image-landscape.png" />
-    <Content Include="scripts\libs\durandal\img\ios-startup-image-portrait.png" />
-    <Content Include="scripts\libs\durandal\js\activator.js" />
-    <Content Include="scripts\libs\durandal\js\app.js" />
-    <Content Include="scripts\libs\durandal\js\binder.js" />
-    <Content Include="scripts\libs\durandal\js\composition.js" />
-    <Content Include="scripts\libs\durandal\js\events.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\dialog.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\history.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\http.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\observable.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\router.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\serializer.js" />
-    <Content Include="scripts\libs\durandal\js\plugins\widget.js" />
-    <Content Include="scripts\libs\durandal\js\system.js" />
-    <Content Include="scripts\libs\durandal\js\transitions\entrance.js" />
-    <Content Include="scripts\libs\durandal\js\viewEngine.js" />
-    <Content Include="scripts\libs\durandal\js\viewLocator.js" />
-    <Content Include="scripts\libs\fastclick\fastclick.js" />
-    <Content Include="scripts\libs\fastclick\fastclickko.js" />
-    <Content Include="scripts\libs\hammer\hammer.min.js" />
-    <Content Include="scripts\libs\jquery\jquery.js" />
-    <Content Include="scripts\libs\knockout\knockout-3.1.0.debug.js" />
-    <Content Include="scripts\libs\knockout\knockout-3.1.0.js" />
-    <Content Include="scripts\libs\knockout\knockout-3.3.0.debug.js" />
-    <Content Include="scripts\libs\knockout\knockout-3.3.0.js" />
-    <Content Include="scripts\libs\require\almond-custom.js" />
-    <Content Include="scripts\libs\require\r.js" />
-    <Content Include="scripts\libs\require\require.js" />
-    <Content Include="scripts\libs\require\text.js" />
-    <Content Include="scripts\libs\semantic\components\accordion.css" />
-    <Content Include="scripts\libs\semantic\components\accordion.js" />
-    <Content Include="scripts\libs\semantic\components\accordion.min.css" />
-    <Content Include="scripts\libs\semantic\components\accordion.min.js" />
-    <Content Include="scripts\libs\semantic\components\ad.css" />
-    <Content Include="scripts\libs\semantic\components\ad.min.css" />
-    <Content Include="scripts\libs\semantic\components\api.js" />
-    <Content Include="scripts\libs\semantic\components\api.min.js" />
-    <Content Include="scripts\libs\semantic\components\breadcrumb.css" />
-    <Content Include="scripts\libs\semantic\components\breadcrumb.min.css" />
-    <Content Include="scripts\libs\semantic\components\button.css" />
-    <Content Include="scripts\libs\semantic\components\button.min.css" />
-    <Content Include="scripts\libs\semantic\components\card.css" />
-    <Content Include="scripts\libs\semantic\components\card.min.css" />
-    <Content Include="scripts\libs\semantic\components\checkbox.css" />
-    <Content Include="scripts\libs\semantic\components\checkbox.js" />
-    <Content Include="scripts\libs\semantic\components\checkbox.min.css" />
-    <Content Include="scripts\libs\semantic\components\checkbox.min.js" />
-    <Content Include="scripts\libs\semantic\components\comment.css" />
-    <Content Include="scripts\libs\semantic\components\comment.min.css" />
-    <Content Include="scripts\libs\semantic\components\dimmer.css" />
-    <Content Include="scripts\libs\semantic\components\dimmer.js" />
-    <Content Include="scripts\libs\semantic\components\dimmer.min.css" />
-    <Content Include="scripts\libs\semantic\components\dimmer.min.js" />
-    <Content Include="scripts\libs\semantic\components\divider.css" />
-    <Content Include="scripts\libs\semantic\components\divider.min.css" />
-    <Content Include="scripts\libs\semantic\components\dropdown.css" />
-    <Content Include="scripts\libs\semantic\components\dropdown.js" />
-    <Content Include="scripts\libs\semantic\components\dropdown.min.css" />
-    <Content Include="scripts\libs\semantic\components\dropdown.min.js" />
-    <Content Include="scripts\libs\semantic\components\feed.css" />
-    <Content Include="scripts\libs\semantic\components\feed.min.css" />
-    <Content Include="scripts\libs\semantic\components\flag.css" />
-    <Content Include="scripts\libs\semantic\components\flag.min.css" />
-    <Content Include="scripts\libs\semantic\components\form.css" />
-    <Content Include="scripts\libs\semantic\components\form.js" />
-    <Content Include="scripts\libs\semantic\components\form.min.css" />
-    <Content Include="scripts\libs\semantic\components\form.min.js" />
-    <Content Include="scripts\libs\semantic\components\grid.css" />
-    <Content Include="scripts\libs\semantic\components\grid.min.css" />
-    <Content Include="scripts\libs\semantic\components\header.css" />
-    <Content Include="scripts\libs\semantic\components\header.min.css" />
-    <Content Include="scripts\libs\semantic\components\icon.css" />
-    <Content Include="scripts\libs\semantic\components\icon.min.css" />
-    <Content Include="scripts\libs\semantic\components\image.css" />
-    <Content Include="scripts\libs\semantic\components\image.min.css" />
-    <Content Include="scripts\libs\semantic\components\input.css" />
-    <Content Include="scripts\libs\semantic\components\input.min.css" />
-    <Content Include="scripts\libs\semantic\components\item.css" />
-    <Content Include="scripts\libs\semantic\components\item.min.css" />
-    <Content Include="scripts\libs\semantic\components\label.css" />
-    <Content Include="scripts\libs\semantic\components\label.min.css" />
-    <Content Include="scripts\libs\semantic\components\list.css" />
-    <Content Include="scripts\libs\semantic\components\list.min.css" />
-    <Content Include="scripts\libs\semantic\components\loader.css" />
-    <Content Include="scripts\libs\semantic\components\loader.min.css" />
-    <Content Include="scripts\libs\semantic\components\menu.css" />
-    <Content Include="scripts\libs\semantic\components\menu.min.css" />
-    <Content Include="scripts\libs\semantic\components\message.css" />
-    <Content Include="scripts\libs\semantic\components\message.min.css" />
-    <Content Include="scripts\libs\semantic\components\modal.css" />
-    <Content Include="scripts\libs\semantic\components\modal.js" />
-    <Content Include="scripts\libs\semantic\components\modal.min.css" />
-    <Content Include="scripts\libs\semantic\components\modal.min.js" />
-    <Content Include="scripts\libs\semantic\components\nag.css" />
-    <Content Include="scripts\libs\semantic\components\nag.js" />
-    <Content Include="scripts\libs\semantic\components\nag.min.css" />
-    <Content Include="scripts\libs\semantic\components\nag.min.js" />
-    <Content Include="scripts\libs\semantic\components\popup.css" />
-    <Content Include="scripts\libs\semantic\components\popup.js" />
-    <Content Include="scripts\libs\semantic\components\popup.min.css" />
-    <Content Include="scripts\libs\semantic\components\popup.min.js" />
-    <Content Include="scripts\libs\semantic\components\progress.css" />
-    <Content Include="scripts\libs\semantic\components\progress.js" />
-    <Content Include="scripts\libs\semantic\components\progress.min.css" />
-    <Content Include="scripts\libs\semantic\components\progress.min.js" />
-    <Content Include="scripts\libs\semantic\components\rail.css" />
-    <Content Include="scripts\libs\semantic\components\rail.min.css" />
-    <Content Include="scripts\libs\semantic\components\rating.css" />
-    <Content Include="scripts\libs\semantic\components\rating.js" />
-    <Content Include="scripts\libs\semantic\components\rating.min.css" />
-    <Content Include="scripts\libs\semantic\components\rating.min.js" />
-    <Content Include="scripts\libs\semantic\components\reset.css" />
-    <Content Include="scripts\libs\semantic\components\reset.min.css" />
-    <Content Include="scripts\libs\semantic\components\reveal.css" />
-    <Content Include="scripts\libs\semantic\components\reveal.min.css" />
-    <Content Include="scripts\libs\semantic\components\search.css" />
-    <Content Include="scripts\libs\semantic\components\search.js" />
-    <Content Include="scripts\libs\semantic\components\search.min.css" />
-    <Content Include="scripts\libs\semantic\components\search.min.js" />
-    <Content Include="scripts\libs\semantic\components\segment.css" />
-    <Content Include="scripts\libs\semantic\components\segment.min.css" />
-    <Content Include="scripts\libs\semantic\components\shape.css" />
-    <Content Include="scripts\libs\semantic\components\shape.js" />
-    <Content Include="scripts\libs\semantic\components\shape.min.css" />
-    <Content Include="scripts\libs\semantic\components\shape.min.js" />
-    <Content Include="scripts\libs\semantic\components\sidebar.css" />
-    <Content Include="scripts\libs\semantic\components\sidebar.js" />
-    <Content Include="scripts\libs\semantic\components\sidebar.min.css" />
-    <Content Include="scripts\libs\semantic\components\sidebar.min.js" />
-    <Content Include="scripts\libs\semantic\components\site.css" />
-    <Content Include="scripts\libs\semantic\components\site.js" />
-    <Content Include="scripts\libs\semantic\components\site.min.css" />
-    <Content Include="scripts\libs\semantic\components\site.min.js" />
-    <Content Include="scripts\libs\semantic\components\state.js" />
-    <Content Include="scripts\libs\semantic\components\state.min.js" />
-    <Content Include="scripts\libs\semantic\components\statistic.css" />
-    <Content Include="scripts\libs\semantic\components\statistic.min.css" />
-    <Content Include="scripts\libs\semantic\components\step.css" />
-    <Content Include="scripts\libs\semantic\components\step.min.css" />
-    <Content Include="scripts\libs\semantic\components\sticky.css" />
-    <Content Include="scripts\libs\semantic\components\sticky.js" />
-    <Content Include="scripts\libs\semantic\components\sticky.min.css" />
-    <Content Include="scripts\libs\semantic\components\sticky.min.js" />
-    <Content Include="scripts\libs\semantic\components\tab.css" />
-    <Content Include="scripts\libs\semantic\components\tab.js" />
-    <Content Include="scripts\libs\semantic\components\tab.min.css" />
-    <Content Include="scripts\libs\semantic\components\tab.min.js" />
-    <Content Include="scripts\libs\semantic\components\table.css" />
-    <Content Include="scripts\libs\semantic\components\table.min.css" />
-    <Content Include="scripts\libs\semantic\components\transition.css" />
-    <Content Include="scripts\libs\semantic\components\transition.js" />
-    <Content Include="scripts\libs\semantic\components\transition.min.css" />
-    <Content Include="scripts\libs\semantic\components\transition.min.js" />
-    <Content Include="scripts\libs\semantic\components\video.css" />
-    <Content Include="scripts\libs\semantic\components\video.js" />
-    <Content Include="scripts\libs\semantic\components\video.min.css" />
-    <Content Include="scripts\libs\semantic\components\video.min.js" />
-    <Content Include="scripts\libs\semantic\components\visibility.js" />
-    <Content Include="scripts\libs\semantic\components\visibility.min.js" />
-    <Content Include="scripts\libs\semantic\semantic.css" />
-    <Content Include="scripts\libs\semantic\semantic.js" />
-    <Content Include="scripts\libs\semantic\semantic.min.css" />
-    <Content Include="scripts\libs\semantic\semantic.min.js" />
-    <Content Include="scripts\libs\semantic\themes\basic\assets\fonts\icons.eot" />
-    <Content Include="scripts\libs\semantic\themes\basic\assets\fonts\icons.svg" />
-    <Content Include="scripts\libs\semantic\themes\basic\assets\fonts\icons.ttf" />
-    <Content Include="scripts\libs\semantic\themes\basic\assets\fonts\icons.woff" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.eot" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.otf" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.svg" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.ttf" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.woff" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\fonts\icons.woff2" />
-    <Content Include="scripts\libs\semantic\themes\default\assets\images\flags.png" />
-    <Content Include="scripts\libs\swiper\css\swiper.min.css" />
-    <Content Include="scripts\libs\swiper\swiper.min.js" />
-    <Content Include="scripts\viewmodels\debug\debugreader.js" />
-    <Content Include="scripts\viewmodels\detail.js" />
-    <Content Include="scripts\viewmodels\home.js" />
-    <Content Include="scripts\viewmodels\list.js" />
-    <Content Include="scripts\viewmodels\main.js" />
-    <Content Include="scripts\viewmodels\reader.js" />
-    <Content Include="scripts\views\debug\debugreader.html" />
-    <Content Include="scripts\views\detail.html" />
-    <Content Include="scripts\views\home.html" />
-    <Content Include="scripts\views\list.html" />
-    <Content Include="scripts\views\main.html" />
-    <Content Include="scripts\views\reader.html" />
-    <Folder Include="images\" />
-    <Content Include="merges\android\scripts\android2.3-jscompat.js" />
-    <Content Include="merges\android\scripts\platformOverrides.js" />
-    <Folder Include="merges\ios\" />
-    <Content Include="merges\windows\scripts\platformOverrides.js" />
-    <Content Include="merges\windows\scripts\winstore-jscompat.js" />
-    <Folder Include="merges\wp8\" />
-    <Folder Include="res\icons\android\" />
-    <Folder Include="res\icons\ios\" />
-    <Folder Include="res\icons\wp8\" />
-    <Folder Include="res\icons\windows\" />
-    <Folder Include="res\screens\android\" />
-    <Folder Include="res\screens\ios\" />
-    <Folder Include="res\screens\windows\" />
-    <Folder Include="res\screens\wp8\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="config.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="index.html" />
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="res\icons\android\icon-36-ldpi.png" />
-    <Content Include="res\icons\android\icon-48-mdpi.png" />
-    <Content Include="res\icons\android\icon-72-hdpi.png" />
-    <Content Include="res\icons\android\icon-96-xhdpi.png" />
-    <Content Include="res\icons\ios\icon-40.png" />
-    <Content Include="res\icons\ios\icon-40-2x.png" />
-    <Content Include="res\icons\ios\icon-50.png" />
-    <Content Include="res\icons\ios\icon-50-2x.png" />
-    <Content Include="res\icons\ios\icon-57.png" />
-    <Content Include="res\icons\ios\icon-57-2x.png" />
-    <Content Include="res\icons\ios\icon-60.png" />
-    <Content Include="res\icons\ios\icon-60-2x.png" />
-    <Content Include="res\icons\ios\icon-60-3x.png" />
-    <Content Include="res\icons\ios\icon-72.png" />
-    <Content Include="res\icons\ios\icon-72-2x.png" />
-    <Content Include="res\icons\ios\icon-76.png" />
-    <Content Include="res\icons\ios\icon-76-2x.png" />
-    <Content Include="res\icons\ios\icon-small.png" />
-    <Content Include="res\icons\ios\icon-small-2x.png" />
-    <Content Include="res\icons\windows\Square150x150Logo.scale-100.png" />
-    <Content Include="res\icons\windows\Square30x30Logo.scale-100.png" />
-    <Content Include="res\icons\windows\Square310x310Logo.scale-100.png" />
-    <Content Include="res\icons\windows\Square150x150Logo.scale-240.png" />
-    <Content Include="res\icons\windows\Square44x44Logo.scale-240.png" />
-    <Content Include="res\icons\windows\Square70x70Logo.scale-100.png" />
-    <Content Include="res\icons\windows\Square71x71Logo.scale-240.png" />
-    <Content Include="res\icons\windows\StoreLogo.scale-100.png" />
-    <Content Include="res\icons\windows\StoreLogo.scale-240.png" />
-    <Content Include="res\icons\windows\Wide310x150Logo.scale-100.png" />
-    <Content Include="res\icons\windows\Wide310x150Logo.scale-240.png" />
-    <Content Include="res\icons\wp8\ApplicationIcon.png" />
-    <Content Include="res\icons\wp8\Background.png" />
-    <Content Include="res\native\android\ant.properties" />
-    <Content Include="res\screens\android\screen-hdpi-landscape.png" />
-    <Content Include="res\screens\android\screen-hdpi-portrait.png" />
-    <Content Include="res\screens\android\screen-ldpi-landscape.png" />
-    <Content Include="res\screens\android\screen-ldpi-portrait.png" />
-    <Content Include="res\screens\android\screen-mdpi-landscape.png" />
-    <Content Include="res\screens\android\screen-mdpi-portrait.png" />
-    <Content Include="res\screens\android\screen-xhdpi-landscape.png" />
-    <Content Include="res\screens\android\screen-xhdpi-portrait.png" />
-    <Content Include="res\screens\ios\screen-ipad-landscape.png" />
-    <Content Include="res\screens\ios\screen-ipad-landscape-2x.png" />
-    <Content Include="res\screens\ios\screen-ipad-portrait.png" />
-    <Content Include="res\screens\ios\screen-ipad-portrait-2x.png" />
-    <Content Include="res\screens\ios\screen-iphone-568h-2x.png" />
-    <Content Include="res\screens\ios\screen-iphone-landscape-736h.png" />
-    <Content Include="res\screens\ios\screen-iphone-portrait.png" />
-    <Content Include="res\screens\ios\screen-iphone-portrait-2x.png" />
-    <Content Include="res\screens\ios\screen-iphone-portrait-667h.png" />
-    <Content Include="res\screens\ios\screen-iphone-portrait-736h.png" />
-    <Content Include="res\screens\windows\SplashScreen.scale-100.png" />
-    <Content Include="res\screens\windows\SplashScreen.scale-240.png" />
-    <Content Include="res\screens\windows\SplashScreenPhone.scale-240.png" />
-    <Content Include="res\screens\wp8\SplashScreenImage.jpg" />
-    <TypeScriptCompile Include="scripts\constant\constant.ts" />
-    <TypeScriptCompile Include="scripts\index.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\cordova.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\BatteryStatus.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Camera.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Contacts.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Device.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\DeviceMotion.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\DeviceOrientation.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Dialogs.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\FileSystem.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\FileTransfer.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Globalization.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\InAppBrowser.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Media.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\MediaCapture.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\NetworkInformation.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Push.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Splashscreen.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\Vibration.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\cordova\plugins\WebSQL.d.ts" />
-    <TypeScriptCompile Include="scripts\libs\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="scripts\model\AppModel.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelChapter.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelContent.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelImage.ts" />
-    <TypeScriptCompile Include="scripts\model\NovelVolume.ts" />
-    <TypeScriptCompile Include="scripts\model\Source.ts" />
-    <TypeScriptCompile Include="scripts\parser\BakaTsuki.ts" />
-    <TypeScriptCompile Include="scripts\parser\DetailParser.ts" />
-    <TypeScriptCompile Include="scripts\parser\MenuParser.ts" />
-    <TypeScriptCompile Include="scripts\platformOverrides.ts" />
-  </ItemGroup>
   <PropertyGroup>
-    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
-    <DefaultReferenceGroup>Implicit (Multi-Device Apps)</DefaultReferenceGroup>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptCompileOnSaveEnabled>true</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>true</TypeScriptSourceMap>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+  <PropertyGroup>
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Distribution'">
-    <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptOutFile>scripts/app.js</TypeScriptOutFile>
-  </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CordovaTools\vs-mda-targets\Microsoft.MDA.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CordovaTools\vs-mda-targets\Microsoft.TypeScript.MDA.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\ApacheCordovaTools\vs-mda-targets\Microsoft.TypeScript.MDA.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\ApacheCordovaTools\vs-mda-targets\Microsoft.MDA.FileMirroring.targets" />
   <PropertyGroup>
     <ProjectUISubcaption>Tools for Apache Cordova</ProjectUISubcaption>
   </PropertyGroup>
@@ -475,8 +100,14 @@
     <Error Condition="$(MDAPropertiesEvaluated) == '' And $(MDAVsixDir) == ''" Text="Path to Visual Studio Extension for Tools for Apache Cordova has not been specified. Please install it and set the MDAVsixDir environment variable before building." />
     <!-- Sanity check that things exist in the specified places. These are more likely to fail if building outside Visual Studio and the required environment variables have not been set, or set incorrectly. -->
     <Error Condition="!Exists('$(NodeJsDir)') Or !Exists('$(NodeJsDir)\node.exe')" Text="The specified NodeJs directory $(NodeJsDir) either does not exist, or does not contain node.exe. Please check that NodeJs has been installed, and set the NodeJsDir variable to the correct directory." />
-    <Error Condition="!Exists('$(MDAVsixDir)') Or !Exists('$(MDAVsixDir)\packages\vs-mda')" Text="The specified directory to the Visual Studio extension $(MDAVsixDir)\node.exe either does not exist, or does not contain a packages\vs-mda sub-directory. Please check that the extension directory exists and set the MDAVsixDir variable to the correct directory." />
+    <Error Condition="!Exists('$(MDAVsixDir)') Or !Exists('$(MDAVsixDir)\packages\vs-tac')" Text="The specified directory to the Visual Studio extension $(MDAVsixDir)\node.exe either does not exist, or does not contain a packages\vs-tac sub-directory. Please check that the extension directory exists and set the MDAVsixDir variable to the correct directory." />
     <!-- Installs (if necessary) the supporting Nodejs module -->
-    <Exec Command="&quot;$(MDAVsixDir)&quot;\packages\vs-mda\install &quot;$(NodeJsDir)&quot; &quot;$(MDAVsixDir)&quot;\packages\vs-mda" />
+    <Exec Command="&quot;$(MDAVsixDir)&quot;\packages\vs-tac\install &quot;$(NodeJsDir)&quot; &quot;$(MDAVsixDir)&quot;\packages\vs-tac" />
   </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="_apacheCordovaProjectSourceItems.Targets" Condition="Exists('_apacheCordovaProjectSourceItems.Targets')" />
 </Project>
